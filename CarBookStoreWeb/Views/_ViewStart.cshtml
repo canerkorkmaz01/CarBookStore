@@ -1,0 +1,30 @@
+﻿@{
+
+    var routeUrl = ViewContext.RouteData.Values["action"].ToString();
+
+    var pages = new List<string>
+{ "Index", "About"};
+
+    if (pages.Any(routeUrl.Contains))
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_LayoutEmpty";
+    }
+
+    @*@{
+        string CurrentReq = Convert.ToString(Context.Request.HttpContext.Request.RouteValues["Controller"]);
+        dynamic Layout;
+        switch (CurrentReq)
+        {
+            case "Home":
+                Layout = "_Layout";
+                break;
+            default:
+                Layout = "_LayoutEmpty";
+                break;
+        }
+    }*@
+}
