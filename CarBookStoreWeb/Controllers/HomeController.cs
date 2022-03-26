@@ -21,5 +21,10 @@ namespace CarBookStoreWeb.Controllers
         {
             return View();
         }
+
+        public IActionResult Services()
+        {
+            return View();
+        }
     }
 }
