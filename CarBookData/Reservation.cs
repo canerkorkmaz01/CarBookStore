@@ -27,9 +27,19 @@ namespace CarBookData
         [Display(Name = "Email Adresi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string Email { get; set; }
+
+        [Display(Name = "Kiralama Tarihi")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RentalDate { get; set; }
-        public DateTime PickUpTime { get; set; }
+
+        [Display(Name = "Alış Tarihi")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime PurchaseDate{ get; set; }
+
+        [Display(Name = "Teslim Tarihi")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DeliveryDate { get; set; }
+
 
         [Display(Name = "Yakıt Tipi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
@@ -38,8 +48,6 @@ namespace CarBookData
         [Display(Name = "Vites Tipi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string Gear { get; set; }
-        public bool Enable { get; set; }
-
         public virtual Car Cars { get; set; }
     }
 

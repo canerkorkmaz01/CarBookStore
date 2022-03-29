@@ -1,0 +1,190 @@
+﻿@model Reservation
+@{
+
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+    ViewData["Title"] = "Rezervasyon";
+}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a asp-controller="Home" asp-action="Index">Anasayfa <i class="ion-ios-arrow-forward"></i></a></span> <span>Rezervasyon <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Rezervasyon Yap</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+*<div class="mt-2 container">
+     <form method="post" enctype="multipart/form-data">
+
+         <div class="form-row">
+             <div class="col-md-4 mb-3 form-group">
+                 <label>Araç Seçiniz</label>
+                 <select class="custom-select">
+                     <option value="" selected disabled></option>
+                 </select>
+                 <span></span>
+             </div>
+             <div class="col-md-4 mb-3 form-group">
+                 <label>Vites Türü</label>
+                 <select class="custom-select">
+                     <option value="" selected disabled></option>
+                 </select>
+                 <span></span>
+             </div>
+             <div class="col-md-4 mb-3 form-group">
+                 <label>Yakıt Türü</label>
+                 <select class="custom-select">
+                     <option value="" selected disabled></option>
+                 </select>
+                 <span></span>
+             </div>
+         </div>
+         <div class="form-row">
+             <div class="col-md-4 mb-3">
+                 <label for="validationTooltip01">Adınız Soyadınız</label>
+                 <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Adınız Soyadınız" required>
+                 <div class="valid-tooltip">
+                     Looks good!
+                 </div>
+             </div>
+             <div class="col-md-4 mb-3">
+                 <label for="validationTooltip02">Telefonuz</label>
+                 <input type="text" class="form-control" id="validationTooltip02" placeholder="Telefon" value="Telefon" required>
+                 <div class="valid-tooltip">
+                     Looks good!
+                 </div>
+             </div>
+             <div class="col-md-4 mb-3">
+                 <label for="exampleInputEmail1" class="form-label">Email Adresi</label>
+                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Lütfen Email Adresi Giriniz">
+                 <div id="emailHelp" class="form-text"></div>
+             </div>
+         </div>
+         <div class="form-row">
+             <div class="col-md-4 mb-3">
+                 <label asp-for="RentalDate">Kiralama Tarihi</label>
+                 <input type="text" asp-for="RentalDate" readonly class="form-control" id="book_off_date" placeholder="">
+                 <span asp-validation-for="RentalDate"></span>
+             </div>
+             <div class="col-md-4 mb-3">
+                 <label asp-for="PurchaseDate" class="label">Alış Tarihi</label>
+                 <input type="text" asp-for="PurchaseDate" class="form-control" id="book_off_date" placeholder="">
+                 <span asp-validation-for="PurchaseDate"></span>
+             </div>
+             <div class="col-md-4 mb-3">
+                 <label asp-for="DeliveryDate" class="label">Teslim Tarihi</label>
+                 <input type="text" asp-for="DeliveryDate" class="form-control" id="book_off_date" placeholder="">
+                 <span asp-validation-for="DeliveryDate"></span>
+             </div>
+
+         </div>
+         <button type="submit" class="btn btn-primary">
+             <i class="fa fa-save"></i> Rezervasyon Yap
+         </button>
+         <a class="btn btn-link" asp-action="Index">İptal</a>
+     </form>   
+</div>
+
+<section class="ftco-section bg-light mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-1.jpg); ">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-2.jpg);">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-3.jpg);">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-4.jpg);">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-5.jpg);">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-6.jpg);">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-7.jpg);">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-8.jpg);">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-9.jpg);">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-10.jpg);">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-11.jpg);">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-12.jpg);">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
