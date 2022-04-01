@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "admin-lte@3.2.0",
+      "destination": "Areas/Admin/admin-lte/"
+    }
+  ]
+}

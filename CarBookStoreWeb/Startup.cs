@@ -92,6 +92,10 @@ namespace CarBookStoreWeb
                 endpoints.MapControllerRoute(
                     name: "about",
                     pattern: "{controller=Home}/{action=About}/{id?}");
+
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
             });
 
             context.Database.Migrate();

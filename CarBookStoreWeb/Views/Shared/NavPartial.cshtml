@@ -1,0 +1,44 @@
+﻿@*<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="index" class="nav-link">Anasayfa</a></li>
+                <li class="nav-item"><a asp-action="About" class="nav-link">Hakkında</a></li>
+                <li class="nav-item"><a asp-action="Services" class="nav-link">Hizmetler</a></li>
+                <li class="nav-item"><a asp-controller="Pricing" asp-action="Pricing" class="nav-link">Fiyatlandırma</></a></li>
+                <li class="nav-item"><a asp-controller="Car" asp-action="Cars" class="nav-link">Arabalar</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">İletişim</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>*@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">Anasayfa</a></li>
+                <li class="nav-item"><a asp-controller="Home" asp-action="About" class="nav-link">Hakkında</a></li>
+                <li class="nav-item"><a asp-controller="Home" asp-action="Services" class="nav-link">Hizmetler</a></li>
+                <li class="nav-item"><a asp-controller="Pricing" asp-action="Pricing" class="nav-link">Fiyatlandırma</a></li>
+                <li class="nav-item"><a asp-controller="Car" asp-action="Cars" class="nav-link">Arabalar</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">İletişim</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
