@@ -1,0 +1,55 @@
+﻿@model LoginViewModel
+@{
+    Layout = "_LayoutEmpty";
+    ViewData["title"] = "Kullanıcı Girişi";
+ }
+
+<section class="vh-100 bg-image " style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="mt-2 pb-5 col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class=" text-center mb-5">Kullanıcı Girişi</h2>
+                            <form method="post" novalidate class="mt-4">
+
+                                @if (!ViewContext.ModelState.IsValid)
+                                {
+                                     <div class="alert alert-danger">
+                                         @Html.ValidationSummary()
+                                     </div>
+                                }
+                                <div class="form-group">
+                                    <label asp-for="UserName"></label>
+                                    <input class="form-control" asp-for="UserName"/>
+                                    <span asp-validation-for="UserName"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Password"></label>
+                                    <input class="form-control" asp-for=" Password" />
+                                    <span asp-validation-for="Password"></span>
+                                </div>
+
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Giriş Yap</button>
+                                </div>
+                                <div class="py-4 text-center">
+                                    <small>&copy;@DateTime.Today.Year - CarebookStrore - Tüm Hakları Saklıdır</small>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

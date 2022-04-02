@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarBookStoreWeb.Model
+namespace CarBookStoreWeb.Models
 {
     public class RegisterViewModel
     {

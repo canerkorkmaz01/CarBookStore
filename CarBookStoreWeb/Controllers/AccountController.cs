@@ -1,4 +1,4 @@
-﻿using CarBookStoreWeb.Model;
+﻿using CarBookStoreWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,27 @@ namespace CarBookStoreWeb.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             return View();
         }

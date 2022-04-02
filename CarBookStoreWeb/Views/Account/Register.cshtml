@@ -1,6 +1,5 @@
-﻿
-@{            
-           
+﻿@model RegisterViewModel
+@{                  
     ViewData["title"] = "Yeni Üyelik";
  }
 
@@ -11,45 +10,39 @@
                 <div class="mt-2 pb-5 col-12 col-md-9 col-lg-7 col-xl-6">
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+                            <h2 class="text-uppercase text-center mb-5">Hesap Oluştur</h2>
 
-                            <form>
+                            <form id="Register" asp-action="Register" method="post" autocomplete="off" class="mt-4">
 
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example1cg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1cg">E Posta Adresi</label>
+                                <div class="form-group">
+                                    <label asp-for="Email"></label>
+                                    <input class="form-control" asp-for="Email" placeholder="e-posta adresinizi yazınız..." autocomplete="off" />
+                                    <span asp-validation-for="Email"></span>
                                 </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example3cg">Ad Soyad</label>
+                                <div class="form-group">
+                                    <label asp-for="Name"></label>
+                                    <input class="form-control" asp-for="Name" placeholder="adınızı yazınız..." autocomplete="off" />
+                                    <span asp-validation-for="Name"></span>
                                 </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cg">Password</label>
+                                <div class="form-group">
+                                    <label asp-for="Password"></label>
+                                    <input class="form-control" asp-for="Password" placeholder="parolanızı yazınız..." autocomplete="off" />
+                                    <span asp-validation-for="Password"></span>
                                 </div>
-
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+                                <div class="form-group">
+                                    <label asp-for="PasswordConfirm"></label>
+                                    <input class="form-control" asp-for="PasswordConfirm" placeholder="parolanızı tekrar yazınız..." autocomplete="off" />
+                                    <span asp-validation-for="PasswordConfirm"></span>
                                 </div>
-
-                                @*<div class="form-check d-flex justify-content-center mb-5">
-                                    <input class="form-check-input me-2"
-                                           type="checkbox"
-                                           value=""
-                                           id="form2Example3cg" />
-                                    <label class="form-check-label" for="form2Example3g">
-                                        I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                                    </label>
-                                </div>*@
+                                <div class="form-group">
+                                    <label asp-for="Gender"></label>
+                                    <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<Genders>()" class="custom-select"></select>
+                                    <span asp-validation-for="Gender"></span>
+                                </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                                    <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Kayıt Ol</button>
                                 </div>
-
-                                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" class="fw-bold text-body"><u>Login here</u></a></p>
 
                             </form>
 
