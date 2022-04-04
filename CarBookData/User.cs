@@ -33,7 +33,8 @@ namespace CarBookData
         public virtual ICollection<CarFeature> CarFeatures { get; set; } = new HashSet<CarFeature>();
         public virtual ICollection<CarPicture> CarPictures { get; set; } = new HashSet<CarPicture>();
         public virtual ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
-
+        public virtual ICollection<Pricing> Pricings { get; set; } = new HashSet<Pricing>();
+        public virtual ICollection<Contact> Contacts { get; set; } = new HashSet<Contact>();
     }
 
     public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
@@ -62,8 +63,17 @@ namespace CarBookData
                 .WithOne(p => p.User)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder
+               .HasMany(p => p.Pricings)
+               .WithOne(p => p.User)
+               .HasForeignKey(p => p.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
 
-
+            builder
+              .HasMany(p => p.Contacts)
+              .WithOne(p => p.User)
+              .HasForeignKey(p => p.UserId)
+              .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

@@ -1,5 +1,6 @@
 ﻿@model RegisterViewModel
-@{                  
+@{ 
+    Layout = "_LayoutEmpty";
     ViewData["title"] = "Yeni Üyelik";
  }
 
@@ -13,6 +14,13 @@
                             <h2 class="text-uppercase text-center mb-5">Hesap Oluştur</h2>
 
                             <form id="Register" asp-action="Register" method="post" autocomplete="off" class="mt-4">
+
+                                @if (!ViewContext.ModelState.IsValid)
+                                {
+                                    <div class="alert alert-danger">
+                                         @Html.ValidationSummary()
+                                     </div>          
+                                }
 
                                 <div class="form-group">
                                     <label asp-for="Email"></label>
@@ -41,7 +49,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Kayıt Ol</button>
+                                    <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Kayıt Ol</button>
                                 </div>
 
                             </form>
@@ -53,3 +61,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -9,7 +9,9 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using CarBookStoreWeb.Sys;
 
 namespace CarBookStoreWeb
 {
@@ -25,7 +27,7 @@ namespace CarBookStoreWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            
             services.AddControllersWithViews()
 
             .AddNewtonsoftJson(options =>
@@ -61,12 +63,26 @@ namespace CarBookStoreWeb
                 }
 
             });
+            services
+            .AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequireDigit = Configuration.GetValue<bool>("Application:Password:RequireDigit");
+                options.Password.RequiredLength = Configuration.GetValue<int>("Application:Password:RequiredLength");
+                options.Password.RequireLowercase = Configuration.GetValue<bool>("Application:Password:RequireLowercase");
+                options.Password.RequireUppercase = Configuration.GetValue<bool>("Application:Password:RequireUppercase");
+                options.Password.RequireNonAlphanumeric = Configuration.GetValue<bool>("Application:Password:RequireNonAlphanumeric");
 
+                options.Lockout.MaxFailedAccessAttempts = Configuration.GetValue<int>("Application:Lockout:MaxFailedAccessAttempts");
+                options.Lockout.DefaultLockoutTimeSpan = Configuration.GetValue<TimeSpan>("Application:Lockout:DefaultLockoutTimeSpan");
 
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddErrorDescriber<MvcStoreIdentityErrorDescriber>()
+            .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context/*, RoleManager<Role> roleManager, UserManager<User> userManager*/)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AppDbContext context, RoleManager<Role> roleManager, UserManager<User> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -76,15 +92,20 @@ namespace CarBookStoreWeb
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.UseStaticFiles();
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -93,12 +114,43 @@ namespace CarBookStoreWeb
                     name: "about",
                     pattern: "{controller=Home}/{action=About}/{id?}");
 
-                endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+              
             });
 
             context.Database.Migrate();
+
+            new[]
+            {
+                new Role { Name = "Administrators", DisplayName = "Yöneticiler" },
+                new Role { Name = "Staff", DisplayName = "Personeller" }
+            }
+           .ToList()
+           .ForEach(p =>
+           {
+               if (!roleManager.RoleExistsAsync(p.Name).Result)
+               {
+                   roleManager.CreateAsync(p).Wait();
+               }
+           });
+
+            if (userManager.FindByNameAsync(Configuration.GetValue<string>("Application:DefaultAdmin:UserName")).Result == null)
+            {
+                var newUser = new User
+                {
+                    UserName = Configuration.GetValue<string>("Application:DefaultAdmin:UserName"),
+                    Name = Configuration.GetValue<string>("Application:DefaultAdmin:Name"),
+                    Email = Configuration.GetValue<string>("Application:DefaultAdmin:UserName"),
+                    EmailConfirmed = true
+
+                    //SecurityStamp = Guid.NewGuid().ToString()
+                };
+                //userManager.AddClaimAsync(newUser, new Claim("FullName", newUser.Name)).Wait();
+
+
+                userManager.CreateAsync(newUser, Configuration.GetValue<string>("Application:DefaultAdmin:Password")).Wait();
+                userManager.AddToRoleAsync(newUser, "Administrators").Wait();
+            }
+
         }
     }
 }

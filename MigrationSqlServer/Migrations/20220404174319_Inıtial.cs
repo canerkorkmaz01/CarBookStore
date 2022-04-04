@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MigrationSqlServer.Migrations
 {
-    public partial class db : Migration
+    public partial class Inıtial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -215,7 +215,7 @@ namespace MigrationSqlServer.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,7 +307,7 @@ namespace MigrationSqlServer.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Pricings_Cars_CarId",
                         column: x => x.CarId,
@@ -327,7 +327,7 @@ namespace MigrationSqlServer.Migrations
                     Telephone = table.Column<string>(type: "varchar(11)", unicode: false, maxLength: 11, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
                     RentalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PickUpTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FuelType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
                     Gear = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),

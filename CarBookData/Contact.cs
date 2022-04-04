@@ -9,21 +9,17 @@ using System.Threading.Tasks;
 
 namespace CarBookData
 {
-    public class Contact : BaseEntity
+    public class Contact:BaseEntity
     {
         public string Name { get; set; }
         public string Email { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
     }
-
     public class ContactEntityTypeConfiguration : IEntityTypeConfiguration<Contact>
     {
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
-
-
-
         }
     }
 }

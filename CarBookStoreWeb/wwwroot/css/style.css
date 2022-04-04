@@ -8239,7 +8239,7 @@ h1, h2, h3, h4, h5,
     background: #1089ff;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
+/*    -ms-border-radius: 2px;*/
     border-radius: 2px; }
     .ftco-navbar-light .navbar-nav > .nav-item.cta > a span {
       display: inline-block;

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MigrationSqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220327232544_db")]
-    partial class db
+    [Migration("20220404174319_Inıtial")]
+    partial class Inıtial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -355,7 +355,7 @@ namespace MigrationSqlServer.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<DateTime>("PickUpTime")
+                    b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("RentalDate")
@@ -641,9 +641,9 @@ namespace MigrationSqlServer.Migrations
             modelBuilder.Entity("CarBookData.Contact", b =>
                 {
                     b.HasOne("CarBookData.User", "User")
-                        .WithMany()
+                        .WithMany("Contacts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -658,9 +658,9 @@ namespace MigrationSqlServer.Migrations
                         .IsRequired();
 
                     b.HasOne("CarBookData.User", "User")
-                        .WithMany()
+                        .WithMany("Pricings")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Cars");
@@ -759,6 +759,10 @@ namespace MigrationSqlServer.Migrations
                     b.Navigation("CarPictures");
 
                     b.Navigation("Cars");
+
+                    b.Navigation("Contacts");
+
+                    b.Navigation("Pricings");
 
                     b.Navigation("Reservations");
                 });
