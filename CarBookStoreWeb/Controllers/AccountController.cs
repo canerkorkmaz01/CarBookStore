@@ -1,11 +1,13 @@
 ﻿using CarBookData;
 using CarBookStoreWeb.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CarBookStoreWeb.Controllers
@@ -16,12 +18,14 @@ namespace CarBookStoreWeb.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment hostingEnvironment;
         private readonly AppDbContext context;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IConfiguration configuration,
+            IWebHostEnvironment hostingEnvironment,
             AppDbContext context
             )
         {
@@ -44,7 +48,61 @@ namespace CarBookStoreWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            return View();
+            var newUser = new User
+            {
+                UserName=model.Email,
+                Name=model.Name,
+                Email=model.Email,
+                Gender=model.Gender,
+                EmailConfirmed=false
+            };
+            var result = await userManager.CreateAsync(newUser, model.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("",error.Description);
+                }
+                return View(model);
+            }
+            else
+            {
+                await userManager.AddClaimAsync(newUser, new Claim("FullName",newUser.Name));
+                await userManager.AddToRoleAsync(newUser, "Staff");
+
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                var url = Url.Action("Confirmation", "Account", new { id = newUser.Id, token }, Request.Scheme);
+
+                //var body = string.Format(
+                //    System.IO.File.ReadAllText(System.IO.Path.Combine(hostingEnvironment.WebRootPath, "Content", "template", "confirmation.html")),
+                //    model.Name,
+                //    url
+                //    );
+
+                //await mailService.SendAsync(
+                //    mailTo: model.Email,
+                //    subject: $"{configuration.GetValue<string>("Application:Name")} Üyelik E-Posta Doğrulama Mesajı",
+                //    message: body,
+                //    isHtml: true
+                //    );
+
+                  return View("RegisterSuccess");
+
+                /*return View(url)*/;
+            }
+            
+        }
+
+        public async Task<IActionResult> Confirmation(int id, string token)
+        {
+            var user = await userManager.FindByIdAsync(id.ToString());
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return View();
+            }
+            return BadRequest();
         }
 
         [HttpGet]
@@ -73,6 +131,12 @@ namespace CarBookStoreWeb.Controllers
                 ModelState.AddModelError("", "Geçersiz kullanıcı girişi");
                 return View(model);
             }
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
