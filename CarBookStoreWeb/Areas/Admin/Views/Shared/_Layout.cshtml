@@ -35,10 +35,23 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">İletişim</a>
                 </li>
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Account" asp-action="Logout" class="nav-link">
+                        <i class="fa fa-power-off"></i> Çıkış
+                    </a>
+                </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a asp-area=""  class="nav-link">
+                        <i class="fa fa-user"></i> @User.FindFirst(ClaimTypes.Name).Value
+                    </a>
+                </li>
+
+
                 <!-- Navbar Search -->
                 <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -175,7 +188,7 @@
                         <img src="~/lib/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Önay Yalçıner</a>
+                        <a href="#" class="d-block">Önay YALÇINER</a>
                     </div>
                 </div>
 
@@ -228,7 +241,9 @@
 
                         <li class="nav-header">KATALOG</li>
                         <li class="nav-item">
-                            <a href="~/lib/pages/widgets.html" class="nav-link">
+                            <a asp-controller="Cars" asp-action="CarsAdd" class="nav-link">
+
+                               
                                 <i class="nav-icon fas fa-car"></i>
                                 <p>
                                     Araç Yönetimi
@@ -238,6 +253,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="~/lib/pages/widgets.html" class="nav-link">
+                                
                                 <i class="nav-icon fas fa-money-bill"></i>
                                 <p>
                                     Fiyat Yönetimi
@@ -309,8 +325,8 @@
         <!-- /.control-sidebar -->
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
+            <strong>Copyright &copy;&nbsp; @DateTime.Now.Year <a href="">MVCStoreCarebook</a> </strong>
+            All rights reserved
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
             </div>
