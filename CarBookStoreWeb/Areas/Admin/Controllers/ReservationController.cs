@@ -15,5 +15,16 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(string a)
+        {
+            return View();
+        }
     }
 }
