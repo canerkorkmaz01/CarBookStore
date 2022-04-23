@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CarBookData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,23 @@ using System.Threading.Tasks;
 namespace CarBookStoreWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Administrators")]
-    public class CarsController : Controller
+    [Authorize(Roles = "Administrators,Staff")]
+    public class CarFeatureController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-
+    
         public IActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CarFeature carFeature)
+        {
+
             return View();
         }
 

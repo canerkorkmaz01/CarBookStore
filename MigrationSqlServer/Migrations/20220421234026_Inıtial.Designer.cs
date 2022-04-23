@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MigrationSqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220404174319_Inıtial")]
+    [Migration("20220421234026_Inıtial")]
     partial class Inıtial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,9 +31,6 @@ namespace MigrationSqlServer.Migrations
                     b.Property<int>("Armchair")
                         .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarFeaturesId")
                         .HasColumnType("int");
 
                     b.Property<string>("CarName")
@@ -98,40 +95,29 @@ namespace MigrationSqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Armchair")
-                        .IsUnique();
-
-                    b.HasIndex("CarFeaturesId")
-                        .IsUnique();
+                    b.HasIndex("Armchair");
 
                     b.HasIndex("CarName")
                         .IsUnique();
 
-                    b.HasIndex("FuelType")
-                        .IsUnique();
+                    b.HasIndex("FuelType");
 
-                    b.HasIndex("GearType")
-                        .IsUnique();
+                    b.HasIndex("GearType");
 
-                    b.HasIndex("Kilometer")
-                        .IsUnique();
+                    b.HasIndex("Kilometer");
 
-                    b.HasIndex("Licence")
-                        .IsUnique();
+                    b.HasIndex("Licence");
 
                     b.HasIndex("Plate")
                         .IsUnique();
 
-                    b.HasIndex("Safe")
-                        .IsUnique();
+                    b.HasIndex("Safe");
 
-                    b.HasIndex("SuitCase")
-                        .IsUnique();
+                    b.HasIndex("SuitCase");
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("Year")
-                        .IsUnique();
+                    b.HasIndex("Year");
 
                     b.ToTable("Cars");
                 });
@@ -148,6 +134,9 @@ namespace MigrationSqlServer.Migrations
 
                     b.Property<bool>("Bluetooth")
                         .HasColumnType("bit");
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("ChildSeat")
                         .HasColumnType("bit");
@@ -195,6 +184,9 @@ namespace MigrationSqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CarId")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -591,30 +583,30 @@ namespace MigrationSqlServer.Migrations
 
             modelBuilder.Entity("CarBookData.Car", b =>
                 {
-                    b.HasOne("CarBookData.CarFeature", "CarFeatures")
-                        .WithOne("Cars")
-                        .HasForeignKey("CarBookData.Car", "CarFeaturesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarBookData.User", "User")
                         .WithMany("Cars")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("CarFeatures");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("CarBookData.CarFeature", b =>
                 {
+                    b.HasOne("CarBookData.Car", "Cars")
+                        .WithOne("CarFeatures")
+                        .HasForeignKey("CarBookData.CarFeature", "CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CarBookData.User", "User")
                         .WithMany("CarFeatures")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Cars");
 
                     b.Navigation("User");
                 });
@@ -740,16 +732,13 @@ namespace MigrationSqlServer.Migrations
 
             modelBuilder.Entity("CarBookData.Car", b =>
                 {
+                    b.Navigation("CarFeatures");
+
                     b.Navigation("CarPictures");
 
                     b.Navigation("Pricings");
 
                     b.Navigation("Reservations");
-                });
-
-            modelBuilder.Entity("CarBookData.CarFeature", b =>
-                {
-                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("CarBookData.User", b =>

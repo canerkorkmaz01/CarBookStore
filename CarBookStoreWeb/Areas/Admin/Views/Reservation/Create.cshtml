@@ -1,5 +1,99 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Reservation
 @{
+    ViewData["title"] = "Rezervasyonlar";
 }
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Rezervasyon Ekle</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive " style="width:100%">
+           
+            <div class="mt-2 container">
+                <form method="post" enctype="multipart/form-data">
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Araç Seçiniz</label>
+                            <select class="custom-select">
+                                <option value="" selected disabled></option>
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Vites Türü</label>
+                            <select class="custom-select">
+                                <option value="" selected disabled></option>
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Yakıt Türü</label>
+                            <select class="custom-select">
+                                <option value="" selected disabled></option>
+                            </select>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip01">Adınız Soyadınız</label>
+                            <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Adınız Soyadınız" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip02">Telefonuz</label>
+                            <input type="text" class="form-control" id="validationTooltip02" placeholder="Telefon" value="Telefon" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email Adresi</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Lütfen Email Adresi Giriniz">
+                            <div id="emailHelp" class="form-text"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="RentalDate">Kiralama Tarihi</label>
+                            <input type="text" asp-for="RentalDate" readonly class="form-control" id="book_off_date" placeholder="">
+                            <span asp-validation-for="RentalDate"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="PurchaseDate" class="label">Alış Tarihi</label>
+                            <input type="text" asp-for="PurchaseDate" class="form-control" id="book_off_date" placeholder="">
+                            <span asp-validation-for="PurchaseDate"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="DeliveryDate" class="label">Teslim Tarihi</label>
+                            <input type="text" asp-for="DeliveryDate" class="form-control" id="book_off_date" placeholder="">
+                            <span asp-validation-for="DeliveryDate"></span>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">
+                        <i class="fa fa-save"></i> Rezervasyon Yap
+                    </button>
+                    <a class="btn btn-link" asp-action="Index">İptal</a>
+                </form>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>

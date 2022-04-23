@@ -159,34 +159,30 @@ namespace MigrationSqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarFeatures",
+                name: "Cars",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WeatherConditions = table.Column<bool>(type: "bit", nullable: false),
-                    ChildSeat = table.Column<bool>(type: "bit", nullable: false),
-                    SuitCase = table.Column<bool>(type: "bit", nullable: false),
-                    Music = table.Column<bool>(type: "bit", nullable: false),
-                    SafetyBelt = table.Column<bool>(type: "bit", nullable: false),
-                    SleepingBed = table.Column<bool>(type: "bit", nullable: false),
-                    Bluetooth = table.Column<bool>(type: "bit", nullable: false),
-                    OnboardComputer = table.Column<bool>(type: "bit", nullable: false),
-                    AudioInput = table.Column<bool>(type: "bit", nullable: false),
-                    LongTrip = table.Column<bool>(type: "bit", nullable: false),
-                    Toolkit = table.Column<bool>(type: "bit", nullable: false),
-                    RemoteCentralLock = table.Column<bool>(type: "bit", nullable: false),
-                    ClimateControl = table.Column<bool>(type: "bit", nullable: false),
-                    Gps = table.Column<bool>(type: "bit", nullable: false),
+                    CarName = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    Year = table.Column<int>(type: "int", unicode: false, maxLength: 4, nullable: false),
+                    Safe = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    FuelType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    GearType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    Kilometer = table.Column<decimal>(type: "decimal(18,2)", unicode: false, precision: 18, scale: 2, nullable: false),
+                    Armchair = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
+                    SuitCase = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
+                    Licence = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    Plate = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Enabled = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarFeatures", x => x.Id);
+                    table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CarFeatures_AspNetUsers_UserId",
+                        name: "FK_Cars_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -219,39 +215,43 @@ namespace MigrationSqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cars",
+                name: "CarFeatures",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CarName = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    CarFeaturesId = table.Column<int>(type: "int", nullable: false),
-                    Year = table.Column<int>(type: "int", unicode: false, maxLength: 4, nullable: false),
-                    Safe = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    FuelType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    GearType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    Kilometer = table.Column<decimal>(type: "decimal(18,2)", unicode: false, precision: 18, scale: 2, nullable: false),
-                    Armchair = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
-                    SuitCase = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
-                    Licence = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    Plate = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    WeatherConditions = table.Column<bool>(type: "bit", nullable: false),
+                    ChildSeat = table.Column<bool>(type: "bit", nullable: false),
+                    SuitCase = table.Column<bool>(type: "bit", nullable: false),
+                    Music = table.Column<bool>(type: "bit", nullable: false),
+                    SafetyBelt = table.Column<bool>(type: "bit", nullable: false),
+                    SleepingBed = table.Column<bool>(type: "bit", nullable: false),
+                    Bluetooth = table.Column<bool>(type: "bit", nullable: false),
+                    OnboardComputer = table.Column<bool>(type: "bit", nullable: false),
+                    AudioInput = table.Column<bool>(type: "bit", nullable: false),
+                    LongTrip = table.Column<bool>(type: "bit", nullable: false),
+                    Toolkit = table.Column<bool>(type: "bit", nullable: false),
+                    RemoteCentralLock = table.Column<bool>(type: "bit", nullable: false),
+                    ClimateControl = table.Column<bool>(type: "bit", nullable: false),
+                    Gps = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Enabled = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.PrimaryKey("PK_CarFeatures", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_AspNetUsers_UserId",
+                        name: "FK_CarFeatures_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Cars_CarFeatures_CarFeaturesId",
-                        column: x => x.CarFeaturesId,
-                        principalTable: "CarFeatures",
+                        name: "FK_CarFeatures_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -392,6 +392,12 @@ namespace MigrationSqlServer.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CarFeatures_CarId",
+                table: "CarFeatures",
+                column: "CarId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CarFeatures_UserId",
                 table: "CarFeatures",
                 column: "UserId");
@@ -409,14 +415,7 @@ namespace MigrationSqlServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_Armchair",
                 table: "Cars",
-                column: "Armchair",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Cars_CarFeaturesId",
-                table: "Cars",
-                column: "CarFeaturesId",
-                unique: true);
+                column: "Armchair");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_CarName",
@@ -427,26 +426,22 @@ namespace MigrationSqlServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_FuelType",
                 table: "Cars",
-                column: "FuelType",
-                unique: true);
+                column: "FuelType");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_GearType",
                 table: "Cars",
-                column: "GearType",
-                unique: true);
+                column: "GearType");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_Kilometer",
                 table: "Cars",
-                column: "Kilometer",
-                unique: true);
+                column: "Kilometer");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_Licence",
                 table: "Cars",
-                column: "Licence",
-                unique: true);
+                column: "Licence");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_Plate",
@@ -457,14 +452,12 @@ namespace MigrationSqlServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_Safe",
                 table: "Cars",
-                column: "Safe",
-                unique: true);
+                column: "Safe");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_SuitCase",
                 table: "Cars",
-                column: "SuitCase",
-                unique: true);
+                column: "SuitCase");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_UserId",
@@ -474,8 +467,7 @@ namespace MigrationSqlServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_Year",
                 table: "Cars",
-                column: "Year",
-                unique: true);
+                column: "Year");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Contacts_UserId",
@@ -523,6 +515,9 @@ namespace MigrationSqlServer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CarFeatures");
+
+            migrationBuilder.DropTable(
                 name: "CarPictures");
 
             migrationBuilder.DropTable(
@@ -539,9 +534,6 @@ namespace MigrationSqlServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cars");
-
-            migrationBuilder.DropTable(
-                name: "CarFeatures");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

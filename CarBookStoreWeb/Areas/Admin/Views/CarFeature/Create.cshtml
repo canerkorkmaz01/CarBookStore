@@ -1,0 +1,137 @@
+﻿@model CarBookData.CarFeature
+@{ 
+    ViewData["title"] = "Araç Özellikleri Ekle";
+}
+
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Araç Özellikleri</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive " style="width:100%">
+
+            <div class="mt-2 container">
+                <form method="post" enctype="multipart/form-data">
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3 form-group">
+                            <label asp-for="CarId" >Araç Adı</label>
+                            <select class="custom-select" asp-for="CarId">
+                                @*asp-items="@ViewBag.Brands" Araçların İsimleri gelecek Dropdownlist dolduracak*@
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Hava Durumu</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Çocuk Koltuğu</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Valiz</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Müzik</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Emniyet Kemeri</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Uyku Yatağı</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Bluetooth</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Araç Bilgisayarı</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Ses Girişi</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Uzun Yolculuk</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Araç Seti</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Uzaktan Merkezi Kilit</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>İklim Kontrolü</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label>Navigasyon</label>
+                            <select class="custom-select" asp-items="@Html.GetEnumSelectList<Feature>()">
+                            </select>
+                            <span></span>
+                        </div>
+                        @*<div class="col-md-4 mb-3 form-group">
+            <label>Navigasyon</label>
+            <select class="custom-select">
+                <option value="" selected disabled></option>
+            </select>
+            <span></span>
+        </div>*@
+                    </div>
+                   
+                    <button type="submit" class="btn btn-primary mb-2">
+                        <i class="fa fa-save"></i> Kaydet
+                    </button>
+                    <a class="btn btn-link" asp-action="Index">İptal</a>
+                </form>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>

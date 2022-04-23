@@ -12,15 +12,54 @@ using System.Threading.Tasks;
 
 namespace CarBookData
 {
+    public enum Kasa
+    {
+        [Display(Name = "Sedan")] 
+        Sedan,
+        [Display(Name = "Hacpek")]
+        Hackpek
+    }
+    public enum Yakıt
+    {
+        [Display(Name = "Benzin")]
+        Benzin,
+        [Display(Name = "Dizel")]
+        Dizel,
+        [Display(Name = "LPG")]
+        LPG,
+        [Display(Name = "Elektrikli")]
+        Elektrikli
+    }
+    public enum Vites
+    {
+        [Display(Name = "Manuel")]
+        Manuel,
+        [Display(Name = "Otomatik")]
+        Otomatik,
+        [Display(Name = "Triptonik")]
+        Triptonik
+    }
+
+    public enum Ehliyet
+    {
+        [Display(Name = "A")]
+        A,
+        [Display(Name = "B1")]
+        B1,
+        [Display(Name = "B")]
+        B,
+        [Display(Name = "C1")]
+        C1,
+        [Display(Name = "CE1")]
+        CE1
+
+    }
+
     public class Car : BaseEntity
     {
         [Display(Name = "Araç Adı")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string CarName { get; set; }
-
-        [Display(Name = "Araç Özellikleri")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
-        public int CarFeaturesId { get; set; }
 
         [Display(Name = "Yılı")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
@@ -76,31 +115,32 @@ namespace CarBookData
 
             builder
                 .HasIndex(p => new { p.CarName })
-                 .IsUnique();
-            builder
-                .HasIndex(p => new { p.Year })
                 .IsUnique();
+
             builder
-                .HasIndex(p => new { p.Safe })
-                 .IsUnique();
+                .HasIndex(p => new { p.Year });
+                //.IsUnique();
             builder
-                .HasIndex(p => new { p.FuelType })
-                 .IsUnique();
+                .HasIndex(p => new { p.Safe });
+                 //.IsUnique();
             builder
-                .HasIndex(p => new { p.GearType })
-                 .IsUnique();
+                .HasIndex(p => new { p.FuelType });
+                 //.IsUnique();
             builder
-                .HasIndex(p => new { p.Kilometer })
-                 .IsUnique();
+                .HasIndex(p => new { p.GearType });
+                 //.IsUnique();
             builder
-                .HasIndex(p => new { p.Armchair })
-                 .IsUnique();
+                .HasIndex(p => new { p.Kilometer });
+                 //.IsUnique();
             builder
-                .HasIndex(p => new { p.SuitCase })
-                 .IsUnique();
+                .HasIndex(p => new { p.Armchair });
+                 //.IsUnique();
             builder
-                .HasIndex(p => new { p.Licence })
-                 .IsUnique();
+                .HasIndex(p => new { p.SuitCase });
+                 //.IsUnique();
+            builder
+                .HasIndex(p => new { p.Licence });
+                 //.IsUnique();
             builder
               .HasIndex(p => new { p.Plate })
                .IsUnique();
@@ -164,6 +204,12 @@ namespace CarBookData
               .WithOne(p => p.Cars)
               .HasForeignKey(p => p.CarId)
               .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+             .HasMany(p => p.CarPictures)
+             .WithOne(p => p.Cars)
+             .HasForeignKey(p => p.CarId)
+             .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
