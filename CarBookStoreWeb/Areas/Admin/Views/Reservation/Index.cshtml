@@ -6,7 +6,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Araç Özellikleri</h3>
+            <h3 class="card-title">Rezervasyon Listesi</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -18,54 +18,40 @@
             </div>
         </div>
         <div class="table-responsive " style="width:100%">
-            <a asp-controller="CarFeature" asp-action="Create" class="btn btn-info mt-2 mb-2 ml-2 "> <span class=" fas fa-plus"></span> Ekle</a>
+            <a asp-controller="Reservation" asp-action="Create" class="btn btn-info float-right  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Rezervasyon Ekle</a>
             <table class="table">
                 <thead>
                     <tr>
                         <th>
-                            Hava Durumu
+                            Araç İsmi
                         </th>
                         <th>
-                            Çocuk Koltuğu
+                            Müşteri Adı
                         </th>
                         <th>
                             Telefonu
                         </th>
                         <th>
-                            Valiz
+                            E-Mail
                         </th>
                         <th>
-                            Müzik
+                            Kiralama Tarihi
                         </th>
                         <th>
-                            Emniyet Kemeri
+                            Alış Tarihi
                         </th>
                         <th>
-                            Uyku Yatağı
+                            Teslim Tarihi
                         </th>
                         <th>
-                            Bluetooth
+                            Yakıt Tipi
                         </th>
                         <th>
-                            Araç Bilgisayarı
+                            Vites Türü
                         </th>
+
                         <th>
-                            Ses Girişi
-                        </th>
-                        <th>
-                            Uzun Yolculuk
-                        </th>
-                        <th>
-                            Araç Seti
-                        </th>
-                        <th>
-                            Uzaktan Merkezi Kilit
-                        </th>
-                        <th>
-                            İklim Kontrolü
-                        </th>
-                        <th>
-                            Navigasyon
+                            Durum
                         </th>
                         <th>
                             İşlem
@@ -76,59 +62,52 @@
 
                 <tbody>
                     <tr>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
+                        <td>
+                            Renault Clio 1.4
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
+                        <td>
+                            Önay YALÇINER
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
+                        <td>
+
+                            0555 693 65 65
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
+                        <td>
+                            <span class="w-25">
+                                <small>onay.yalçıner@hotmail.com</small>
+                            </span>
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
+                        <td>
+                            11.04.2022
+
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
+                        <td>
+                            22.04.2022
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-danger">Yok</span>
+                        <td>
+                            30.04.2022
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-danger">Yok</span>
+                        <td>
+                            Dizel
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-danger">Yok</span>
+                        <td>
+                            Otomatik Vites
                         </td>
+
                         <td class="project-state">
-                            <span class="badge badge-success">Var</span>
+                            <span class="badge badge-success">Aktif</span>
                         </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">Var</span>
-                        </td>
-                      
-                        <td class="d-flex justify-content-around">
+                        <td>
+
                             <a class="btn btn-info btn-sm" href="#">
-                                <span class="fas fa-pencil-alt">Düzenle</span>
+                                <span class="fas fa-pencil-alt"></span>
+                                Edit
                             </a>
-                           &nbsp;
+                            <br />
                             <a class="btn btn-danger btn-sm" href="#">
-                                <span class="fas fa-trash">Sil</span>
+                                <i class="fas fa-trash">
+                                </i>
+                                Sil
                             </a>
                         </td>
                     </tr>

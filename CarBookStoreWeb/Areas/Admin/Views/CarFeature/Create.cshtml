@@ -26,8 +26,8 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3 form-group">
                             <label asp-for="CarId" >Araç Adı</label>
-                            <select class="custom-select" asp-for="CarId">
-                                @*asp-items="@ViewBag.Brands" Araçların İsimleri gelecek Dropdownlist dolduracak*@
+                            <select class="custom-select" asp-for="CarId" asp-items="@ViewBag.Feauture" >
+                               
                             </select>
                             <span></span>
                         </div>

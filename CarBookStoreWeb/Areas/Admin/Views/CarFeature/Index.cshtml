@@ -1,9 +1,12 @@
-﻿<section class="content">
+﻿@{
+    ViewData["title"] = "Araç Özellikleri";
+}
+<section class="content">
 
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Rezervasyon Listesi</h3>
+            <h3 class="card-title">Araç Özellikleri</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -15,40 +18,54 @@
             </div>
         </div>
         <div class="table-responsive " style="width:100%">
-            <a asp-controller="Reservation" asp-action="Create" class="btn btn-info float-right  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Rezervasyon Ekle</a>
+            <a asp-controller="CarFeature" asp-action="Create" class="btn btn-info mt-2 mb-2 ml-2 "> <span class=" fas fa-plus"></span> Ekle</a>
             <table class="table">
                 <thead>
                     <tr>
                         <th>
-                            Araç İsmi
+                            Hava Durumu
                         </th>
                         <th>
-                            Müşteri Adı
+                            Çocuk Koltuğu
                         </th>
                         <th>
                             Telefonu
                         </th>
                         <th>
-                            E-Mail
+                            Valiz
                         </th>
                         <th>
-                            Kiralama Tarihi
+                            Müzik
                         </th>
                         <th>
-                            Alış Tarihi
+                            Emniyet Kemeri
                         </th>
                         <th>
-                            Teslim Tarihi
+                            Uyku Yatağı
                         </th>
                         <th>
-                            Yakıt Tipi
+                            Bluetooth
                         </th>
                         <th>
-                            Vites Türü
+                            Araç Bilgisayarı
                         </th>
-
                         <th>
-                            Durum
+                            Ses Girişi
+                        </th>
+                        <th>
+                            Uzun Yolculuk
+                        </th>
+                        <th>
+                            Araç Seti
+                        </th>
+                        <th>
+                            Uzaktan Merkezi Kilit
+                        </th>
+                        <th>
+                            İklim Kontrolü
+                        </th>
+                        <th>
+                            Navigasyon
                         </th>
                         <th>
                             İşlem
@@ -59,52 +76,59 @@
 
                 <tbody>
                     <tr>
-                        <td>
-                            Renault Clio 1.4
-                        </td>
-                        <td>
-                            Önay YALÇINER
-                        </td>
-                        <td>
-
-                            0555 693 65 65
-                        </td>
-                        <td>
-                            <span class="w-25">
-                                <small>onay.yalçıner@hotmail.com</small>
-                            </span>
-                        </td>
-                        <td>
-                            11.04.2022
-
-                        </td>
-                        <td>
-                            22.04.2022
-                        </td>
-                        <td>
-                            30.04.2022
-                        </td>
-                        <td>
-                            Dizel
-                        </td>
-                        <td>
-                            Otomatik Vites
-                        </td>
-
                         <td class="project-state">
-                            <span class="badge badge-success">Aktif</span>
+                            <span class="badge badge-success">Var</span>
                         </td>
-                        <td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-danger">Yok</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-danger">Yok</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-danger">Yok</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
+                        <td class="project-state">
+                            <span class="badge badge-success">Var</span>
+                        </td>
 
+                        <td class="d-flex justify-content-around">
                             <a class="btn btn-info btn-sm" href="#">
-                                <span class="fas fa-pencil-alt"></span>
-                                Edit
+                                <span class="fas fa-pencil-alt">Düzenle</span>
                             </a>
-                            <br />
+                            &nbsp;
                             <a class="btn btn-danger btn-sm" href="#">
-                                <i class="fas fa-trash">
-                                </i>
-                                Sil
+                                <span class="fas fa-trash">Sil</span>
                             </a>
                         </td>
                     </tr>

@@ -37,20 +37,16 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Car model)
+        public async Task <IActionResult> Create(Car model)
         {
-            model.DateCreated = DateTime.Now;
+            model.DateCreated  = DateTime.Now;
             model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            model.Enabled = true;
-            model.Safe = Enum.GetName((Kasa)Convert.ToInt32(model.Safe));
-            model.FuelType = Enum.GetName((Yakıt)Convert.ToInt32(model.FuelType));
-            model.GearType = Enum.GetName((Vites)Convert.ToInt32(model.GearType));
-            model.Licence = Enum.GetName((Ehliyet)Convert.ToInt32(model.Licence));
+            //model.Safe = Enum.GetName((Kasa)Convert.ToInt32(model.Safe));
+           
             context.Entry(model).State = EntityState.Added;
-
             try
             {
-                context.SaveChanges();
+                await context.SaveChangesAsync();
                 TempData["success"] = $"{entityName} ekleme işlemi başarıyla tamamlanmıştır.";
                 return RedirectToAction("Index");
             }
@@ -59,9 +55,51 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                 TempData["error"] = $"{entityName} ekleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
                 return View(model);
             }
-            
-
         }
 
+        [HttpGet]
+        public async Task <IActionResult> Edit(int id)
+        {
+            var model = await context.Cars.FindAsync(id);
+            context.Cars.Where(p => p.Licence == Licence.C1);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Car model)
+        {
+            var original = await context.Cars.FindAsync(model.Id);
+           
+            model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            context.Entry(original).CurrentValues.SetValues(model);
+            try
+            {
+                await context.SaveChangesAsync();
+                TempData["success"] = $"{entityName} Güncelleme işlemi başarıyla tamamlanmıştır.";
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                TempData["error"] = $"{entityName} güncelleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var model = await context.Cars.FindAsync(id);
+            context.Entry(model).State = EntityState.Deleted;
+            try
+            {
+                await context.SaveChangesAsync();
+                TempData["success"] = $"{entityName} silme işlemi başarıyla tamamlanmıştır.";
+            }
+            catch (DbUpdateException)
+            {
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

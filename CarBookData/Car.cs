@@ -12,14 +12,21 @@ using System.Threading.Tasks;
 
 namespace CarBookData
 {
-    public enum Kasa
+    public enum Enabled
+    {
+        [Display(Name = "Aktif")]
+        Aktif,
+        [Display(Name = "Pasif")]
+        Pasif
+    }
+    public enum Safe
     {
         [Display(Name = "Sedan")] 
         Sedan,
         [Display(Name = "Hacpek")]
         Hackpek
     }
-    public enum Yakıt
+    public enum FuelType
     {
         [Display(Name = "Benzin")]
         Benzin,
@@ -30,7 +37,7 @@ namespace CarBookData
         [Display(Name = "Elektrikli")]
         Elektrikli
     }
-    public enum Vites
+    public enum GearType
     {
         [Display(Name = "Manuel")]
         Manuel,
@@ -40,7 +47,7 @@ namespace CarBookData
         Triptonik
     }
 
-    public enum Ehliyet
+    public enum Licence : int 
     {
         [Display(Name = "A")]
         A,
@@ -65,17 +72,17 @@ namespace CarBookData
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public int Year { get; set; }
 
-        [Display(Name = "Emniyet")]
+        [Display(Name = "Kasa")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
-        public string Safe { get; set; }
+        public Safe Safe { get; set; }
 
         [Display(Name = "Yakıt Tipi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
-        public string FuelType { get; set; }
+        public FuelType FuelType { get; set; }
 
         [Display(Name = "Vites Tipi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
-        public string GearType { get; set; }
+        public GearType GearType { get; set; }
 
         [Display(Name = "Kilometresi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
@@ -91,11 +98,12 @@ namespace CarBookData
 
         [Display(Name = "Ehliyeti")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
-        public string Licence { get; set; }
+        public Licence Licence { get; set; }
 
         [Display(Name = "Araç Plakası")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string Plate { get; set; }
+
 
         [NotMapped]
         [Display(Name = "Foto")]
@@ -197,7 +205,7 @@ namespace CarBookData
               .Property(p => p.Kilometer)
               .IsUnicode(false)
               .IsRequired()
-              .HasPrecision(18, 2);
+              .HasPrecision(18,0);
 
             builder
               .HasMany(p => p.CarPictures)

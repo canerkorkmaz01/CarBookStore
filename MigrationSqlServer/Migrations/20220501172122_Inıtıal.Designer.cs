@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MigrationSqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220421234026_Inıtial")]
-    partial class Inıtial
+    [Migration("20220501172122_Inıtıal")]
+    partial class Inıtıal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,28 +45,25 @@ namespace MigrationSqlServer.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FuelType")
-                        .IsRequired()
+                    b.Property<int>("FuelType")
                         .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("GearType")
-                        .IsRequired()
+                    b.Property<int>("GearType")
                         .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Kilometer")
-                        .HasPrecision(18, 2)
+                        .HasPrecision(18)
                         .IsUnicode(false)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,0)");
 
-                    b.Property<string>("Licence")
-                        .IsRequired()
+                    b.Property<int>("Licence")
                         .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Plate")
                         .IsRequired()
@@ -74,11 +71,10 @@ namespace MigrationSqlServer.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("Safe")
-                        .IsRequired()
+                    b.Property<int>("Safe")
                         .HasMaxLength(200)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("int");
 
                     b.Property<int>("SuitCase")
                         .HasMaxLength(200)

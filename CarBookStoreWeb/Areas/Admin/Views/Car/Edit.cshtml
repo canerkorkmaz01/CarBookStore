@@ -1,6 +1,6 @@
 ﻿@model Car
 @{
-    ViewData["title"] = "Araç Ekle";
+    ViewData["title"] = "Araç Düzenle";
 }
 
 <section class="content">
@@ -8,7 +8,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Araç Ekle</h3>
+            <h3 class="card-title">Araç Düzenle</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -22,7 +22,7 @@
         <div class="table-responsive " style="width:100%">
 
             <div class="mt-2 container">
-                <form method="post" asp-controller="Car" asp-action="Create" autocomplete="off">
+                <form method="post" asp-controller="Car" asp-action="Edit" autocomplete="off">
 
                     @if (!ViewContext.ModelState.IsValid)
                     {
@@ -31,63 +31,62 @@
                         </div>
                     }
 
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label asp-for="CarName">Araç Giriniz</label>
-                        <input type="text" asp-for="CarName" class="form-control" placeholder="Araç Adı" value="" required>
-                        <span asp-validation-for="CarName"></span>
-                    </div>
-                    <div class="col-md-4 mb-3 form-group">
-                        <label asp-for="Year">Araç Yılı</label>
-                        <input type="number" class="form-control" id="week" asp-for="Year">
-                        <span asp-validation-for="Year"></span>
-                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="CarName">Araç Giriniz</label>
+                            <input type="text" asp-for="CarName" class="form-control" placeholder="Araç Adı" value="@Model.CarName"  required>
+                            <span asp-validation-for="CarName"></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label asp-for="Year">Araç Yılı</label>
+                            <input type="number" class="form-control" asp-for="Year" value="@Model.Year">
+                            <span asp-validation-for="Year"></span>
+                        </div>
 
-                    <div class="col-md-4 mb-3 form-group">
-                        <label asp-for="Safe">Kasa Tipi</label>
-                        <select class="custom-select" asp-for="Safe" asp-items="@Html.GetEnumSelectList<Safe>()">
-                            <option selected="selected" value="">Kasa Tipi</option>
-                        </select>
-                        <span asp-validation-for="Safe"></span>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label asp-for="Safe">Kasa Tipi</label>
+                            <select id="week" class="custom-select" asp-for="Safe" asp-items="@Html.GetEnumSelectList<Safe>()">
+                                <option selected="selected" value="@Model.Safe">Kasa Tipi</option>
+                            </select>
+                            <span asp-validation-for="Safe"></span>
+                        </div>
                     </div>
-                </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3 form-group">
                             <label>Yakıt Tipi</label>
-                            <select class="custom-select" asp-for="FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()">
-                              <option selected="selected" value="">Yakıt Seçiniz</option>
+                            <select id="week" class="custom-select" asp-for="FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()">
+                                <option selected="selected" value="@Model.FuelType">Yakıt Seçiniz</option>
                             </select>
                             <span asp-validation-for="FuelType"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Vites Türü</label>
-                            <select class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
-                                <option selected="selected" value="">Vites Seçiniz</option>
+                            <select  class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
+                                <option selected="selected" value="@Model.GearType">Vites Seçiniz</option>
                             </select>
                             <span asp-validation-for="GearType"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Kilometre</label>
-                            <input type="number" class="form-control" id="week" asp-for="Kilometer">
+                            <input type="number" class="form-control" asp-for="Kilometer" value="@Model.Kilometer" >
                             <span asp-validation-for="Kilometer"></span>
                         </div>
-
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3 form-group">
                             <label asp-for="Armchair">Koltuk Sayısı</label>
-                            <input type="number" class="form-control" id="week" asp-for="Armchair">
+                            <input type="number" class="form-control" id="week" asp-for="Armchair" value="@Model.Armchair">
                             <span asp-validation-for="Armchair"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Valiz Sayısı</label>
-                            <input type="number" class="form-control" id="week" asp-for="SuitCase">
+                            <input  type="number" class="form-control" id="week" asp-for="SuitCase" value="@Model.SuitCase">
                             <span asp-validation-for="SuitCase"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Ehliyet</label>
-                            <select class="custom-select" asp-for="Licence" asp-items="@Html.GetEnumSelectList<Licence>()">
-                                <option selected="selected" value="">Ehliyet Seçiniz</option>
+                            <select  class="custom-select" asp-for="Licence" asp-items="@Html.GetEnumSelectList<Licence>()">
+                                <option selected="selected" asp-for="Licence" value="@Model.Licence" >Ehliyet Seçiniz</option>
                             </select>
                             <span asp-validation-for="Licence"></span>
                         </div>
@@ -95,18 +94,19 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationTooltip01" asp-for="Plate">Araç Plakası</label>
-                            <input type="text" asp-for="Plate" class="form-control" placeholder="Araç Adı" value="" required>
+                            <input id="plate" type="text" asp-for="Plate" class="form-control" placeholder="Araç Adı" value="@Model.Plate" required>
                             <span asp-validation-for="Plate"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Durumu</label>
-                            <select id="week" class="custom-select" asp-for="Enabled" asp-items="@Html.GetEnumSelectList<Enabled>()">
-                                <option selected="selected" value="">Durum</option>
+                            <select id="status" class="custom-select" asp-for="Enabled" asp-items="@Html.GetEnumSelectList<Enabled>()">
+                                <option  selected="selected" value="@Model.Enabled">Durum</option>
                             </select>
-                            <span asp-validation-for="FuelType"></span>
+                            <span asp-validation-for="Enabled"></span>
                         </div>
+
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">
+                    <button type="submit" class="btn btn-primary mb-2 save">
                         <i class="fa fa-save"></i> Kaydet
                     </button>
                     <a class="btn btn-link" asp-action="Index">İptal</a>
@@ -120,4 +120,15 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+<script>
+    $(document).ready(function () {
+        var status = $("#status").val();
+        if (status == "True") {
+            $("#status").val('0');
+        }
+        else {
+            $("#status").val('1');
+        }
+    });
+</script>
 }

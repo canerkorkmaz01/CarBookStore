@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MigrationSqlServer.Migrations
 {
-    public partial class Inıtial : Migration
+    public partial class Inıtıal : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -166,13 +166,13 @@ namespace MigrationSqlServer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CarName = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
                     Year = table.Column<int>(type: "int", unicode: false, maxLength: 4, nullable: false),
-                    Safe = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    FuelType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    GearType = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    Kilometer = table.Column<decimal>(type: "decimal(18,2)", unicode: false, precision: 18, scale: 2, nullable: false),
+                    Safe = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
+                    FuelType = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
+                    GearType = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
+                    Kilometer = table.Column<decimal>(type: "decimal(18,0)", unicode: false, precision: 18, scale: 0, nullable: false),
                     Armchair = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
                     SuitCase = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
-                    Licence = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    Licence = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
                     Plate = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
