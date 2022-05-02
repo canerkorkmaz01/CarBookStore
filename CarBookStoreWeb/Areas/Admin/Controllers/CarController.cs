@@ -61,7 +61,7 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         public async Task <IActionResult> Edit(int id)
         {
             var model = await context.Cars.FindAsync(id);
-            context.Cars.Where(p => p.Licence == Licence.C1);
+           
             return View(model);
         }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CarBookData
 {
-    public enum Feature
+    public enum Feature:byte
     {
         [Display(Name = "Var")]
         True,
@@ -20,20 +20,20 @@ namespace CarBookData
     public class CarFeature : BaseEntity
     {
         public int CarId { get; set; }
-        public bool WeatherConditions { get; set; }
-        public bool ChildSeat { get; set; }
-        public bool SuitCase { get; set; }
-        public bool Music { get; set; }
-        public bool SafetyBelt { get; set; }
-        public bool SleepingBed { get; set; }
-        public bool Bluetooth { get; set; }
-        public bool OnboardComputer { get; set; }
-        public bool AudioInput { get; set; }
-        public bool LongTrip { get; set; }
-        public bool Toolkit { get; set; }
-        public bool RemoteCentralLock { get; set; }
-        public bool ClimateControl { get; set; }
-        public bool Gps { get; set; }
+        public byte WeatherConditions { get; set; }
+        public byte ChildSeat { get; set; }
+        public byte SuitCase { get; set; }
+        public byte Music { get; set; }
+        public byte SafetyBelt { get; set; }
+        public byte SleepingBed { get; set; }
+        public byte Bluetooth { get; set; }
+        public byte OnboardComputer { get; set; }
+        public byte AudioInput { get; set; }
+        public byte LongTrip { get; set; }
+        public byte Toolkit { get; set; }
+        public byte RemoteCentralLock { get; set; }
+        public byte ClimateControl { get; set; }
+        public byte Gps { get; set; }
         public virtual Car Cars { get; set; }
     }
 

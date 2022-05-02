@@ -24,12 +24,13 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
     
         public IActionResult Create()
         {
-            ViewBag.Feauture =  new SelectList(context.Cars.OrderBy(p => p.CarName).ToList(), "Id", "CarName");
+            DropdownFill();
             return View();
         }
 
@@ -38,6 +39,11 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         {
 
             return View();
+        }
+
+        public void DropdownFill()
+        {
+            ViewBag.Feauture = new SelectList(context.Cars.OrderBy(p => p.CarName).ToList(), "Id", "CarName");
         }
 
     }

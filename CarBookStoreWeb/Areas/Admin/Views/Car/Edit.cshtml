@@ -1,4 +1,5 @@
 ﻿@model Car
+@using CarBookStoreWeb.Enums
 @{
     ViewData["title"] = "Araç Düzenle";
 }
@@ -34,7 +35,7 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label asp-for="CarName">Araç Giriniz</label>
-                            <input type="text" asp-for="CarName" class="form-control" placeholder="Araç Adı" value="@Model.CarName"  required>
+                            <input type="text" asp-for="CarName" class="form-control" placeholder="Araç Adı" value="@Model.CarName" required>
                             <span asp-validation-for="CarName"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
@@ -61,14 +62,14 @@
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Vites Türü</label>
-                            <select  class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
+                            <select class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
                                 <option selected="selected" value="@Model.GearType">Vites Seçiniz</option>
                             </select>
                             <span asp-validation-for="GearType"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Kilometre</label>
-                            <input type="number" class="form-control" asp-for="Kilometer" value="@Model.Kilometer" >
+                            <input type="number" class="form-control" asp-for="Kilometer" value="@Model.Kilometer">
                             <span asp-validation-for="Kilometer"></span>
                         </div>
                     </div>
@@ -80,13 +81,13 @@
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Valiz Sayısı</label>
-                            <input  type="number" class="form-control" id="week" asp-for="SuitCase" value="@Model.SuitCase">
+                            <input type="number" class="form-control" id="week" asp-for="SuitCase" value="@Model.SuitCase">
                             <span asp-validation-for="SuitCase"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Ehliyet</label>
-                            <select  class="custom-select" asp-for="Licence" asp-items="@Html.GetEnumSelectList<Licence>()">
-                                <option selected="selected" asp-for="Licence" value="@Model.Licence" >Ehliyet Seçiniz</option>
+                            <select class="custom-select" asp-for="Licence" asp-items="@Html.GetEnumSelectList<Licence>()">
+                                <option selected="selected" asp-for="Licence" value="@Model.Licence">Ehliyet Seçiniz</option>
                             </select>
                             <span asp-validation-for="Licence"></span>
                         </div>
@@ -100,7 +101,7 @@
                         <div class="col-md-4 mb-3 form-group">
                             <label>Durumu</label>
                             <select id="status" class="custom-select" asp-for="Enabled" asp-items="@Html.GetEnumSelectList<Enabled>()">
-                                <option  selected="selected" value="@Model.Enabled">Durum</option>
+                                <option selected="selected" value="@Model.Enabled">Durum</option>
                             </select>
                             <span asp-validation-for="Enabled"></span>
                         </div>
@@ -120,15 +121,15 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-<script>
-    $(document).ready(function () {
-        var status = $("#status").val();
-        if (status == "True") {
-            $("#status").val('0');
-        }
-        else {
-            $("#status").val('1');
-        }
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            var status = $("#status").val();
+            if (status == "True") {
+                $("#status").val('0');
+            }
+            else {
+                $("#status").val('1');
+            }
+        });
+    </script>
 }

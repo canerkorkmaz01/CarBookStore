@@ -123,20 +123,20 @@ namespace MigrationSqlServer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("AudioInput")
-                        .HasColumnType("bit");
+                    b.Property<byte>("AudioInput")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("Bluetooth")
-                        .HasColumnType("bit");
+                    b.Property<byte>("Bluetooth")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("ChildSeat")
-                        .HasColumnType("bit");
+                    b.Property<byte>("ChildSeat")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("ClimateControl")
-                        .HasColumnType("bit");
+                    b.Property<byte>("ClimateControl")
+                        .HasColumnType("tinyint");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -144,38 +144,38 @@ namespace MigrationSqlServer.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Gps")
-                        .HasColumnType("bit");
+                    b.Property<byte>("Gps")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("LongTrip")
-                        .HasColumnType("bit");
+                    b.Property<byte>("LongTrip")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("Music")
-                        .HasColumnType("bit");
+                    b.Property<byte>("Music")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("OnboardComputer")
-                        .HasColumnType("bit");
+                    b.Property<byte>("OnboardComputer")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("RemoteCentralLock")
-                        .HasColumnType("bit");
+                    b.Property<byte>("RemoteCentralLock")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("SafetyBelt")
-                        .HasColumnType("bit");
+                    b.Property<byte>("SafetyBelt")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("SleepingBed")
-                        .HasColumnType("bit");
+                    b.Property<byte>("SleepingBed")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("SuitCase")
-                        .HasColumnType("bit");
+                    b.Property<byte>("SuitCase")
+                        .HasColumnType("tinyint");
 
-                    b.Property<bool>("Toolkit")
-                        .HasColumnType("bit");
+                    b.Property<byte>("Toolkit")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("WeatherConditions")
-                        .HasColumnType("bit");
+                    b.Property<byte>("WeatherConditions")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
