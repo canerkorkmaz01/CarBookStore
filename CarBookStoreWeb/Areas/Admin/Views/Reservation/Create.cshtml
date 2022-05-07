@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="table-responsive " style="width:100%">
-           
+
             <div class="mt-2 container">
                 <form method="post" enctype="multipart/form-data">
 
@@ -84,6 +84,10 @@
                             <input type="text" asp-for="DeliveryDate" class="form-control" id="book_off_date" placeholder="">
                             <span asp-validation-for="DeliveryDate"></span>
                         </div>
+                        <div class="col-md-4 mb-3 ml-4 form-group">
+                            <input asp-for="Enabled" class="form-check-input" type="checkbox">
+                            <label id="check" asp-for="Enabled" class="form-check-label">Pasif</label>
+                        </div>
 
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">
@@ -97,3 +101,8 @@
     </div>
     <!-- /.card -->
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/Projects.js"></script>
+}

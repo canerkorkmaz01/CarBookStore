@@ -13,7 +13,8 @@ using CarBookStoreWeb.Enums;
 
 namespace CarBookData
 {
-    
+   
+
 
     public class Car : BaseEntity
     {
@@ -108,7 +109,7 @@ namespace CarBookData
 
             builder
                 .Property(p => p.CarName)
-               .IsUnicode(false)
+                .IsUnicode(false)
                 .HasMaxLength(200)
                 .IsRequired();
             builder

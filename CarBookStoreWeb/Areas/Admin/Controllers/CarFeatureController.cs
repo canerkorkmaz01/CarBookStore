@@ -27,12 +27,12 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
 
         public async Task <IActionResult> Index()
         {
-
             var model = await context.CarFeatures.ToListAsync();
             DropdownFill();
             return View(model);
         }
-    
+
+        [HttpGet]
         public IActionResult Create()
         {
             DropdownFill();
@@ -43,40 +43,74 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         public async Task <IActionResult> Create(CarFeature carFeature)
         {
             carFeature.DateCreated = DateTime.Now;
-            carFeature.Enabled = true;
             carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             context.Entry(carFeature).State = EntityState.Added;
             try
             {
                 await context.SaveChangesAsync();
-                TempData["success"] = $"{entityName} ekleme işlemi başarıyla tamamlanmıştır";
+                TempData["success"] = $"{entityName} Ekleme işlemi başarıyla tamamlanmıştır";
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (DbUpdateException)
             {
-
-                TempData["error"] = $"{entityName} güncelleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                TempData["error"] = $"{entityName} Eklem işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
                 return View(carFeature);
             }
-            
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
             DropdownFill();
+            if (id == null)
+            {
+                NotFound();
+            }
             var features = await context.CarFeatures.FindAsync(id);
             return View(features);
         }
 
-
         [HttpPost]
         public async Task<ActionResult> Edit(CarFeature carFeature)
         {
-            return View();
+            carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            context.Entry(carFeature).State = EntityState.Modified;
+            try
+            {
+                TempData["success"] = $"{entityName}Ekleme İşlemi Başarıyla Tamamlanmıştır ";
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+
+                TempData["error"] = $"{entityName} Ekleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                return View(carFeature);
+            }
         }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var model = await context.CarFeatures.FindAsync(id);
 
+            context.Entry(model).State = EntityState.Deleted;
+
+            try
+            {
+                await context.SaveChangesAsync();
+                TempData["success"] = $" {entityName}Silme İşlemi Başarıyla Gerçekleştirilmiştir";
+               
+            }
+            catch (DbUpdateException e)
+            {
+                TempData["success"] = $"{e} silme işlemi Başarısız Olmuştur";
+            }
+            return RedirectToAction("Index");
+        }
         public void DropdownFill()
         {
             ViewBag.Feauture = new SelectList(context.Cars.OrderBy(p => p.CarName).ToList(), "Id", "CarName");

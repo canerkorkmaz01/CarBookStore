@@ -58,8 +58,12 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task <IActionResult> Edit(int id)
+        public async Task <IActionResult> Edit(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             var model = await context.Cars.FindAsync(id);
            
             return View(model);
@@ -87,8 +91,12 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             var model = await context.Cars.FindAsync(id);
             context.Entry(model).State = EntityState.Deleted;
             try
@@ -96,8 +104,9 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                 await context.SaveChangesAsync();
                 TempData["success"] = $"{entityName} silme işlemi başarıyla tamamlanmıştır.";
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
+                TempData["success"] = $"{e} silme işlemi Başarısız Olmuştur";
             }
             return RedirectToAction("Index");
         }

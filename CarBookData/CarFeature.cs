@@ -13,9 +13,9 @@ namespace CarBookData
     public enum Feature:byte
     {
         [Display(Name = "Var")]
-        True,
+        Var=1,
         [Display(Name = "Yok")]
-        False
+        Yok=0
     }
     public class CarFeature : BaseEntity
     {

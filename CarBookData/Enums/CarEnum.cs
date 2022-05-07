@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarBookStoreWeb.Enums
 {
-    public enum Enabled
-    {
-        [Display(Name = "Aktif")]
-        Aktif,
-        [Display(Name = "Pasif")]
-        Pasif
-    }
+   
     public enum Safe
     {
         [Display(Name = "Sedan")]
@@ -55,4 +49,6 @@ namespace CarBookStoreWeb.Enums
         CE1
 
     }
+
+   
 }

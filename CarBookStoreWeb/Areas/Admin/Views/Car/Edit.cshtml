@@ -98,14 +98,10 @@
                             <input id="plate" type="text" asp-for="Plate" class="form-control" placeholder="Araç Adı" value="@Model.Plate" required>
                             <span asp-validation-for="Plate"></span>
                         </div>
-                        <div class="col-md-4 mb-3 form-group">
-                            <label>Durumu</label>
-                            <select id="status" class="custom-select" asp-for="Enabled" asp-items="@Html.GetEnumSelectList<Enabled>()">
-                                <option selected="selected" value="@Model.Enabled">Durum</option>
-                            </select>
-                            <span asp-validation-for="Enabled"></span>
-                        </div>
-
+                    </div>
+                    <div class="col-md-4 mb-3 ml-3 form-group">
+                        <input asp-for="Enabled" class="form-check-input" type="checkbox">
+                        <label id="check" asp-for="Enabled" class="form-check-label"></label>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2 save">
                         <i class="fa fa-save"></i> Kaydet
@@ -121,15 +117,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        $(document).ready(function () {
-            var status = $("#status").val();
-            if (status == "True") {
-                $("#status").val('0');
-            }
-            else {
-                $("#status").val('1');
-            }
-        });
-    </script>
+    <script src="~/js/Projects.js"></script>
 }

@@ -30,6 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\Projects.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\lib\dist\js\.eslintrc.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
