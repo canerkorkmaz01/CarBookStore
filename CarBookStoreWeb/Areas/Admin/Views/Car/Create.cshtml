@@ -5,8 +5,6 @@
 }
 
 <section class="content">
-
-    <!-- Default box -->
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Araç Ekle</h3>
@@ -23,7 +21,7 @@
         <div class="table-responsive " style="width:100%">
 
             <div class="mt-2 container">
-                <form method="post" asp-controller="Car" asp-action="Create" autocomplete="off">
+                <form method="post" enctype="multipart/form-data">
 
                     @if (!ViewContext.ModelState.IsValid)
                     {
@@ -100,6 +98,40 @@
                             <span asp-validation-for="Plate"></span>
                         </div>
                     </div>
+
+                    <div class="form-row border">
+                        <div class="pl-5 col-12 form-group row ">
+                            @foreach (var feature in ViewBag.Feature as IEnumerable<Feature>)
+                            {
+                                <div class=" custom-checkbox form-check form-check-inline">
+                                    <input type="checkbox" class="custom-control-input" id="feature_@feature.Id" name="CarFeature" value="@feature.Id">
+                                    <label class="custom-control-label pr-3" for="feature_@feature.Id">@feature.Name</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 form-group">
+                            <label asp-for="PhotoFile"></label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="PhotoFile" name="PhotoFile" accept="image/*">
+                                <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
+                            </div>
+                            <img id="PhotoPreview" src="" height="200" class="p-2 my-2 border d-none" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 form-group">
+                            <label asp-for="PhotoFiles"></label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="PhotoFiles" name="PhotoFiles" multiple accept="image/*">
+                                <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
+                            </div>
+                            <div id="photoGallery" class="d-flex flex-wrap py-2">
+
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-4 mb-3 ml-3 form-group">
                         <input asp-for="Enabled" class="form-check-input" type="checkbox">
                         <label id="check" asp-for="Enabled" class="form-check-label"></label>
@@ -119,4 +151,34 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/Projects.js"></script>
+    <script>
+        $(() => {
+            $('#PhotoFile').change(function () {
+                var reader = new FileReader();
+                reader.onloadend = function (event) {
+                    $('#PhotoPreview').attr('src', reader.result).removeClass('d-none');
+
+                }
+                reader.readAsDataURL(document.getElementById("PhotoFile").files[0]);
+            });
+
+            $('#PhotoFiles').change(function () {
+                var files = document.getElementById("PhotoFiles").files;
+
+                for (var i = 0; i < files.length; i++) {
+                    console.log(i);
+                    var reader = new FileReader();
+                    reader.onloadend = function (event) {
+                        $('#photoGallery').append('<div class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="120" /></div>')
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+            });
+
+            //$('.summernote').summernote({
+            //    height: 400
+            //});
+
+        });
+    </script>
 }

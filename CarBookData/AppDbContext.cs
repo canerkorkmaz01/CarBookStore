@@ -24,7 +24,7 @@ namespace CarBookData
 
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<CarPicture> CarPictures { get; set; }
-        public virtual DbSet<CarFeature> CarFeatures { get; set; }
+        public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Pricing> Pricings { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }

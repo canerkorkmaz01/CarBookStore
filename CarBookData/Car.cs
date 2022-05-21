@@ -13,10 +13,7 @@ using CarBookStoreWeb.Enums;
 
 namespace CarBookData
 {
-   
-
-
-    public class Car : BaseEntity
+     public class Car : BaseEntity
     {
         [Display(Name = "Araç Adı")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
@@ -58,14 +55,21 @@ namespace CarBookData
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string Plate { get; set; }
 
+        public string Photo { get; set; }
+        [NotMapped]
+        public int[] CarFeature { get; set; }
+
 
         [NotMapped]
         [Display(Name = "Foto")]
         public IFormFile PhotoFile { get; set; }
 
-        public virtual CarFeature CarFeatures { get; set; }
+        [NotMapped]
+        [Display(Name = "Foto Galeri")]
+        public IFormFile[] PhotoFiles { get; set; }
 
         public virtual ICollection<CarPicture> CarPictures { get; set; } = new HashSet<CarPicture>();
+        public virtual ICollection<Feature> Features { get; set; } = new HashSet<Feature>();
         public virtual Reservation Reservations { get; set; }
         public virtual Pricing Pricings { get; set; }
     }
@@ -78,7 +82,6 @@ namespace CarBookData
             builder
                 .HasIndex(p => new { p.CarName })
                 .IsUnique();
-
             builder
                 .HasIndex(p => new { p.Year });
                 //.IsUnique();
@@ -163,12 +166,9 @@ namespace CarBookData
 
             builder
               .HasMany(p => p.CarPictures)
-              .WithOne(p => p.Cars)
+              .WithOne(p => p.Car)
               .HasForeignKey(p => p.CarId)
-              .OnDelete(DeleteBehavior.Restrict);
-
-          
-
+              .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

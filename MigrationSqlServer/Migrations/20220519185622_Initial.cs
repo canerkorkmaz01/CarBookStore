@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MigrationSqlServer.Migrations
 {
-    public partial class Inıtıal : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -174,6 +174,7 @@ namespace MigrationSqlServer.Migrations
                     SuitCase = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
                     Licence = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
                     Plate = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Enabled = table.Column<bool>(type: "bit", nullable: false)
@@ -215,45 +216,26 @@ namespace MigrationSqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarFeatures",
+                name: "Features",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    WeatherConditions = table.Column<byte>(type: "tinyint", nullable: false),
-                    ChildSeat = table.Column<byte>(type: "tinyint", nullable: false),
-                    SuitCase = table.Column<byte>(type: "tinyint", nullable: false),
-                    Music = table.Column<byte>(type: "tinyint", nullable: false),
-                    SafetyBelt = table.Column<byte>(type: "tinyint", nullable: false),
-                    SleepingBed = table.Column<byte>(type: "tinyint", nullable: false),
-                    Bluetooth = table.Column<byte>(type: "tinyint", nullable: false),
-                    OnboardComputer = table.Column<byte>(type: "tinyint", nullable: false),
-                    AudioInput = table.Column<byte>(type: "tinyint", nullable: false),
-                    LongTrip = table.Column<byte>(type: "tinyint", nullable: false),
-                    Toolkit = table.Column<byte>(type: "tinyint", nullable: false),
-                    RemoteCentralLock = table.Column<byte>(type: "tinyint", nullable: false),
-                    ClimateControl = table.Column<byte>(type: "tinyint", nullable: false),
-                    Gps = table.Column<byte>(type: "tinyint", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false)
+                    Enabled = table.Column<bool>(type: "bit", nullable: false),
+                    SortOrder = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarFeatures", x => x.Id);
+                    table.PrimaryKey("PK_Features", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CarFeatures_AspNetUsers_UserId",
+                        name: "FK_Features_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CarFeatures_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -266,7 +248,8 @@ namespace MigrationSqlServer.Migrations
                     Photo = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false)
+                    Enabled = table.Column<bool>(type: "bit", nullable: false),
+                    SortOrder = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -282,7 +265,7 @@ namespace MigrationSqlServer.Migrations
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -352,6 +335,30 @@ namespace MigrationSqlServer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CarFeature",
+                columns: table => new
+                {
+                    CarsId = table.Column<int>(type: "int", nullable: false),
+                    FeaturesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarFeature", x => new { x.CarsId, x.FeaturesId });
+                    table.ForeignKey(
+                        name: "FK_CarFeature_Cars_CarsId",
+                        column: x => x.CarsId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CarFeature_Features_FeaturesId",
+                        column: x => x.FeaturesId,
+                        principalTable: "Features",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -392,15 +399,9 @@ namespace MigrationSqlServer.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarFeatures_CarId",
-                table: "CarFeatures",
-                column: "CarId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CarFeatures_UserId",
-                table: "CarFeatures",
-                column: "UserId");
+                name: "IX_CarFeature_FeaturesId",
+                table: "CarFeature",
+                column: "FeaturesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CarPictures_CarId",
@@ -475,6 +476,11 @@ namespace MigrationSqlServer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Features_UserId",
+                table: "Features",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pricings_CarId",
                 table: "Pricings",
                 column: "CarId",
@@ -515,7 +521,7 @@ namespace MigrationSqlServer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CarFeatures");
+                name: "CarFeature");
 
             migrationBuilder.DropTable(
                 name: "CarPictures");
@@ -531,6 +537,9 @@ namespace MigrationSqlServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Features");
 
             migrationBuilder.DropTable(
                 name: "Cars");

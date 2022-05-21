@@ -63,6 +63,9 @@ namespace MigrationSqlServer.Migrations
                         .IsUnicode(false)
                         .HasColumnType("int");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Plate")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -116,77 +119,6 @@ namespace MigrationSqlServer.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("CarBookData.CarFeature", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<byte>("AudioInput")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("Bluetooth")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("ChildSeat")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("ClimateControl")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
-
-                    b.Property<byte>("Gps")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("LongTrip")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("Music")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("OnboardComputer")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("RemoteCentralLock")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("SafetyBelt")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("SleepingBed")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("SuitCase")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("Toolkit")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("WeatherConditions")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CarFeatures");
-                });
-
             modelBuilder.Entity("CarBookData.CarPicture", b =>
                 {
                     b.Property<int>("Id")
@@ -206,6 +138,9 @@ namespace MigrationSqlServer.Migrations
                     b.Property<string>("Photo")
                         .IsUnicode(false)
                         .HasColumnType("varchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -252,6 +187,35 @@ namespace MigrationSqlServer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("CarBookData.Feature", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Features");
                 });
 
             modelBuilder.Entity("CarBookData.Pricing", b =>
@@ -474,6 +438,21 @@ namespace MigrationSqlServer.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("CarFeature", b =>
+                {
+                    b.Property<int>("CarsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FeaturesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarsId", "FeaturesId");
+
+                    b.HasIndex("FeaturesId");
+
+                    b.ToTable("CarFeature");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -586,40 +565,21 @@ namespace MigrationSqlServer.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CarBookData.CarFeature", b =>
+            modelBuilder.Entity("CarBookData.CarPicture", b =>
                 {
-                    b.HasOne("CarBookData.Car", "Cars")
-                        .WithOne("CarFeatures")
-                        .HasForeignKey("CarBookData.CarFeature", "CarId")
+                    b.HasOne("CarBookData.Car", "Car")
+                        .WithMany("CarPictures")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CarBookData.User", "User")
-                        .WithMany("CarFeatures")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Cars");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CarBookData.CarPicture", b =>
-                {
-                    b.HasOne("CarBookData.Car", "Cars")
-                        .WithMany("CarPictures")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CarBookData.User", "User")
                         .WithMany("CarPictures")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Cars");
+                    b.Navigation("Car");
 
                     b.Navigation("User");
                 });
@@ -628,6 +588,17 @@ namespace MigrationSqlServer.Migrations
                 {
                     b.HasOne("CarBookData.User", "User")
                         .WithMany("Contacts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CarBookData.Feature", b =>
+                {
+                    b.HasOne("CarBookData.User", "User")
+                        .WithMany("CarFeatures")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -671,6 +642,21 @@ namespace MigrationSqlServer.Migrations
                     b.Navigation("Cars");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CarFeature", b =>
+                {
+                    b.HasOne("CarBookData.Car", null)
+                        .WithMany()
+                        .HasForeignKey("CarsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarBookData.Feature", null)
+                        .WithMany()
+                        .HasForeignKey("FeaturesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -726,8 +712,6 @@ namespace MigrationSqlServer.Migrations
 
             modelBuilder.Entity("CarBookData.Car", b =>
                 {
-                    b.Navigation("CarFeatures");
-
                     b.Navigation("CarPictures");
 
                     b.Navigation("Pricings");

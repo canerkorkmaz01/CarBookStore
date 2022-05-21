@@ -30,7 +30,7 @@ namespace CarBookData
         public Genders Gender { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
-        public virtual ICollection<CarFeature> CarFeatures { get; set; } = new HashSet<CarFeature>();
+        public virtual ICollection<Feature> CarFeatures { get; set; } = new HashSet<Feature>();
         public virtual ICollection<CarPicture> CarPictures { get; set; } = new HashSet<CarPicture>();
         public virtual ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
         public virtual ICollection<Pricing> Pricings { get; set; } = new HashSet<Pricing>();

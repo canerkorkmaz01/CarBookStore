@@ -2,11 +2,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
+
 
 namespace CarBookStoreWeb.Areas.Admin.Controllers
 {
@@ -33,17 +37,88 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Feature = context.Features.ToList();
             return View();
         }
 
         [HttpPost]
         public async Task <IActionResult> Create(Car model)
         {
-            model.DateCreated  = DateTime.Now;
+            if (model.PhotoFile != null)
+            {
+                try
+                {
+                    using (var image =Image.Load(model.PhotoFile.OpenReadStream()))
+                    {
+                        image.Mutate(p =>
+                        {
+                            p.Resize(new ResizeOptions
+                            {
+                                Mode = ResizeMode.Max,
+                                Size = new Size(600, 600)
+                            });
+                            p.BackgroundColor(Color.White);
+                            model.Photo = image.ToBase64String(JpegFormat.Instance);
+                        });
+                    }
+                }
+                catch (UnknownImageFormatException)
+                {
+                    ModelState.AddModelError("", "Yüklenen dosya bilinen bir görsel biçiminde değil!");
+                    return View(model);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Lütfen bir logo yükleyiniz!");
+                return View(model);
+            }
+
+            if (model.PhotoFiles != null)
+                foreach (var photoFile in model.PhotoFiles)
+                {
+                    try
+                    {
+                        using (var image =Image.Load(photoFile.OpenReadStream()))
+                        {
+                            image.Mutate(p =>
+                            {
+                                p.Resize(new ResizeOptions
+                                {
+                                    Mode = ResizeMode.Max,
+                                    Size = new Size(600, 600)
+                                });
+                                p.BackgroundColor(Color.White);
+                                var photo = new CarPicture
+                                {
+                                    UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                                    DateCreated = DateTime.Now,
+                                    Enabled=model.Enabled,
+                                    Photo = image.ToBase64String(JpegFormat.Instance)
+                                };
+                                model.CarPictures.Add(photo);
+                                context.Entry(photo).State = EntityState.Added;
+                                
+                            });
+                        
+                        }
+                    }
+                    catch (UnknownImageFormatException)
+                    {
+
+                    }
+                }
+
+            if(model.CarFeature != null)
+            {
+                var features = await context.Features.ToListAsync();
+                model.CarFeature.ToList().ForEach(p => model.Features.Add(features.Single(q => q.Id == p)));
+            }
+
+            model.DateCreated = DateTime.Now;
             model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            //model.Safe = Enum.GetName((Kasa)Convert.ToInt32(model.Safe));
-           
             context.Entry(model).State = EntityState.Added;
+            ////model.Safe = Enum.GetName((Kasa)Convert.ToInt32(model.Safe));
             try
             {
                 await context.SaveChangesAsync();

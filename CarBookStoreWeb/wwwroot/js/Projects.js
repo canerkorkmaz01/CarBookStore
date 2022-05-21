@@ -3,15 +3,15 @@
             var enable = $("#Enabled").val();
 
       if ($('#Enabled').is(':checked')) {
-    $("#check").text("Aktif");
+          $("#check").text("Aktif"); 
             }
   else {
     $("#check").text("Pasif");
             }
-  $("input[type='checkbox']").click(function () {
+      $('#Enabled').click(function () {
                 
                 if (this.checked) {
-    $("#check").text("Aktif");
+                    $("#check").text("Aktif"); 
                 }
   else {
     $("#check").text("Pasif");
@@ -19,4 +19,5 @@
             });
           
         });
+
 
