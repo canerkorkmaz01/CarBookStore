@@ -1,15 +1,13 @@
 ﻿@model Car
 @using CarBookStoreWeb.Enums
 @{
-    ViewData["title"] = "Araç Düzenle";
+    ViewData["title"] = "Araç Güncelle";
 }
 
 <section class="content">
-
-    <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Araç Düzenle</h3>
+            <h3 class="card-title">Araç Ekle</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -23,7 +21,7 @@
         <div class="table-responsive " style="width:100%">
 
             <div class="mt-2 container">
-                <form method="post" asp-controller="Car" asp-action="Edit" autocomplete="off">
+                <form method="post" enctype="multipart/form-data">
 
                     @if (!ViewContext.ModelState.IsValid)
                     {
@@ -35,19 +33,19 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label asp-for="CarName">Araç Giriniz</label>
-                            <input type="text" asp-for="CarName" class="form-control" placeholder="Araç Adı" value="@Model.CarName" required>
+                            <input type="text" asp-for="CarName" class="form-control" placeholder="Araç Adı" value="" required>
                             <span asp-validation-for="CarName"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label asp-for="Year">Araç Yılı</label>
-                            <input type="number" class="form-control" asp-for="Year" value="@Model.Year">
+                            <input type="number" class="form-control" id="week" asp-for="Year">
                             <span asp-validation-for="Year"></span>
                         </div>
 
                         <div class="col-md-4 mb-3 form-group">
                             <label asp-for="Safe">Kasa Tipi</label>
-                            <select id="week" class="custom-select" asp-for="Safe" asp-items="@Html.GetEnumSelectList<Safe>()">
-                                <option selected="selected" value="@Model.Safe">Kasa Tipi</option>
+                            <select class="custom-select" asp-for="Safe" asp-items="@Html.GetEnumSelectList<Safe>()">
+                                <option selected="selected" value="">Kasa Tipi</option>
                             </select>
                             <span asp-validation-for="Safe"></span>
                         </div>
@@ -55,39 +53,40 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3 form-group">
                             <label>Yakıt Tipi</label>
-                            <select id="week" class="custom-select" asp-for="FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()">
-                                <option selected="selected" value="@Model.FuelType">Yakıt Seçiniz</option>
+                            <select class="custom-select" asp-for="FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()">
+                                <option selected="selected" value="">Yakıt Seçiniz</option>
                             </select>
                             <span asp-validation-for="FuelType"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Vites Türü</label>
                             <select class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
-                                <option selected="selected" value="@Model.GearType">Vites Seçiniz</option>
+                                <option selected="selected" value="">Vites Seçiniz</option>
                             </select>
                             <span asp-validation-for="GearType"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Kilometre</label>
-                            <input type="number" class="form-control" asp-for="Kilometer" value="@Model.Kilometer">
+                            <input type="number" class="form-control" id="week" asp-for="Kilometer">
                             <span asp-validation-for="Kilometer"></span>
                         </div>
+
                     </div>
                     <div class="form-row">
                         <div class="col-md-4 mb-3 form-group">
                             <label asp-for="Armchair">Koltuk Sayısı</label>
-                            <input type="number" class="form-control" id="week" asp-for="Armchair" value="@Model.Armchair">
+                            <input type="number" class="form-control" id="week" asp-for="Armchair">
                             <span asp-validation-for="Armchair"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Valiz Sayısı</label>
-                            <input type="number" class="form-control" id="week" asp-for="SuitCase" value="@Model.SuitCase">
+                            <input type="number" class="form-control" id="week" asp-for="SuitCase">
                             <span asp-validation-for="SuitCase"></span>
                         </div>
                         <div class="col-md-4 mb-3 form-group">
                             <label>Ehliyet</label>
                             <select class="custom-select" asp-for="Licence" asp-items="@Html.GetEnumSelectList<Licence>()">
-                                <option selected="selected" asp-for="Licence" value="@Model.Licence">Ehliyet Seçiniz</option>
+                                <option selected="selected" value="">Ehliyet Seçiniz</option>
                             </select>
                             <span asp-validation-for="Licence"></span>
                         </div>
@@ -95,15 +94,49 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationTooltip01" asp-for="Plate">Araç Plakası</label>
-                            <input id="plate" type="text" asp-for="Plate" class="form-control" placeholder="Araç Adı" value="@Model.Plate" required>
+                            <input type="text" asp-for="Plate" class="form-control" placeholder="Araç Adı" value="" required>
                             <span asp-validation-for="Plate"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row border">
+                        <div class="pl-3 col-12 form-group row ">
+                            @foreach (var feature in ViewBag.Feature as IEnumerable<Feature>)
+                            {
+                                <div class=" form-check form-check-inline">
+                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Id" name="CarFeature" value="@feature.Id">
+                                    <label class="form-check-label " for="feature_@feature.Id">@feature.Name</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 form-group">
+                            <label asp-for="PhotoFile"></label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="PhotoFile" name="PhotoFile" accept="image/*">
+                                <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
+                            </div>
+                            <img id="PhotoPreview" src="" height="200" class="p-2 my-2 border d-none" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 form-group">
+                            <label asp-for="PhotoFiles"></label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="PhotoFiles" name="PhotoFiles" multiple accept="image/*">
+                                <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
+                            </div>
+                            <div id="photoGallery" class="d-flex flex-wrap py-2">
+
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3 ml-3 form-group">
                         <input asp-for="Enabled" class="form-check-input" type="checkbox">
                         <label id="check" asp-for="Enabled" class="form-check-label"></label>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2 save">
+                    <button type="submit" class="btn btn-primary mb-2">
                         <i class="fa fa-save"></i> Kaydet
                     </button>
                     <a class="btn btn-link" asp-action="Index">İptal</a>
@@ -118,4 +151,34 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/Projects.js"></script>
+    <script>
+        $(() => {
+            $('#PhotoFile').change(function () {
+                var reader = new FileReader();
+                reader.onloadend = function (event) {
+                    $('#PhotoPreview').attr('src', reader.result).removeClass('d-none');
+
+                }
+                reader.readAsDataURL(document.getElementById("PhotoFile").files[0]);
+            });
+
+            $('#PhotoFiles').change(function () {
+                var files = document.getElementById("PhotoFiles").files;
+
+                for (var i = 0; i < files.length; i++) {
+                    console.log(i);
+                    var reader = new FileReader();
+                    reader.onloadend = function (event) {
+                        $('#photoGallery').append('<div class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="120" /></div>')
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+            });
+
+            //$('.summernote').summernote({
+            //    height: 400
+            //});
+
+        });
+    </script>
 }

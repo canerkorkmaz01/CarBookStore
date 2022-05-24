@@ -1,4 +1,4 @@
-﻿@model List<Feature>
+﻿@model IEnumerable<Feature>
 
 @{
     ViewData["title"] = "Araç Özellikleri";
@@ -20,260 +20,60 @@
             </div>
         </div>
         <div class="table-responsive " style="width:100%;">
-            <a asp-controller="CarFeature" asp-action="Create" class="btn btn-info mt-2 mb-2 ml-2 "> <span class=" fas fa-plus"></span> Ekle</a>
+            <a asp-controller="Feature" asp-action="Create" class="btn btn-info mt-2 mb-2 ml-2 "> <span class=" fas fa-plus"></span> Ekle</a>
             <table class="table" style="width:100%;">
 
                 <thead>
                     <tr>
                         <th>
-                            Araç Adı
+                            Özellik Adı
                         </th>
                         <th>
-                            Hava Durumu
-                        </th>
-                        <th>
-                            Çocuk Koltuğu
-                        </th>
-                        <th>
-                            Valiz
-                        </th>
-                        <th>
-                            Müzik
-                        </th>
-                        <th>
-                            Emniyet Kemeri
-                        </th>
-                        <th>
-                            Uyku Yatağı
-                        </th>
-                        <th>
-                            Bluetooth
-                        </th>
-                        <th>
-                            Araç Bilgisayarı
-                        </th>
-                        <th>
-                            Ses Girişi
-                        </th>
-                        <th>
-                            Uzun Yolculuk
-                        </th>
-                        <th>
-                            Araç Seti
-                        </th>
-                        <th>
-                            Uzaktan Merkezi Kilit
-                        </th>
-                        <th>
-                            İklim Kontrolü
-                        </th>
-                        <th>
-                            Navigasyon
+                           Kayıt Tarihi
                         </th>
                         <th>
                             Durum
                         </th>
                         <th>
-                            İşlem
+                            Kaydı Yapan
                         </th>
-
+                        <th>
+                            İşlemler
+                        </th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @*@foreach (var feature in Model)
+                    @foreach (var feature in Model)
                     {
-                        <tr>
-                            <td class="project-state" align="center">
-                                @feature.Cars.CarName
+                    <tr>
+                        <td class="project-state" align="left">
+                            @feature.Name
+                        </td>
+                        <td class="project-state" align="left">
+                            @feature.DateCreated
+                        </td>
+                        <td class="project-state" align="left">
+                            @feature.User.Name
+                        </td>
+                        @if (feature.Enabled)
+                        {
+                            <td class="project-state" align="left">
+                                <span class="badge badge-success sp">Var</span>
                             </td>
-                            @if (feature.WeatherConditions == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success sp">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.ChildSeat == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.SuitCase == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.Music == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.SafetyBelt == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.SleepingBed == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.Bluetooth == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.OnboardComputer == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.AudioInput == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.LongTrip == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.Toolkit == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.RemoteCentralLock == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.ClimateControl == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.Gps == 1)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Var</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Yok</span>
-                                </td>
-                            }
-                            @if (feature.Enabled)
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-success">Aktif</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state" align="center">
-                                    <span class="badge badge-danger">Pasif</span>
-                                </td>
-                            }
-
-                            <td>
-                                <partial name="RowButtonsPartial" model="@feature" />
+                        }
+                        else
+                        {
+                            <td class="project-state" align="left">
+                                <span class="badge badge-danger">Yok</span>
                             </td>
-                        </tr>
+                        }
+                        <td>
+                            <partial name="RowButtonsPartial" model="@feature" />
+                        </td>
+                    </tr>
 
-                    }*@
+                    }
                 </tbody>
 
 

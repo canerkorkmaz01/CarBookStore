@@ -27,13 +27,13 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var feature = context.Features.OrderBy(x => x.Name).ToList();
+            return View(feature);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            DropdownFill();
             return View();
         }
 
@@ -56,68 +56,62 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
             }
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult> Edit(int? id)
-        //{
-        //    DropdownFill();
-        //    if (id == null)
-        //    {
-        //        NotFound();
-        //    }
-        //    var features = await context.CarFeatures.FindAsync(id);
-        //    return View(features);
-        //}
+        [HttpGet]
+        public async Task<ActionResult> Edit(int? id)
+        {
+           
+            if (id == null)
+            {
+                NotFound();
+            }
+            var features = await context.Features.FindAsync(id);
+            return View(features);
+        }
 
-        //[HttpPost]
-        //public async Task<ActionResult> Edit(CarFeature carFeature)
-        //{
-        //    carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-        //    context.Entry(carFeature).State = EntityState.Modified;
-        //    try
-        //    {
-        //        TempData["success"] = $"{entityName}Ekleme İşlemi Başarıyla Tamamlanmıştır ";
-        //        await context.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch (DbUpdateException)
-        //    {
+        [HttpPost]
+        public async Task<ActionResult> Edit(Feature carFeature)
+        {
+            carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            context.Entry(carFeature).State = EntityState.Modified;
+            try
+            {
+                TempData["success"] = $"{entityName}Güncelleme İşlemi Başarıyla Tamamlanmıştır ";
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
 
-        //        TempData["error"] = $"{entityName} Ekleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
-        //        return View(carFeature);
-        //    }
-        //}
+                TempData["error"] = $"{entityName} Güncelleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                return View(carFeature);
+            }
+        }
 
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var model = await context.CarFeatures.FindAsync(id);
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var model = await context.Features.FindAsync(id);
 
-        //    context.Entry(model).State = EntityState.Deleted;
+            context.Entry(model).State = EntityState.Deleted;
 
-        //    try
-        //    {
-        //        await context.SaveChangesAsync();
-        //        TempData["success"] = $" {entityName}Silme İşlemi Başarıyla Gerçekleştirilmiştir";
+            try
+            {
+                await context.SaveChangesAsync();
+                TempData["success"] = $" {entityName}Silme İşlemi Başarıyla Gerçekleştirilmiştir";
 
-        //    }
-        //    catch (DbUpdateException e)
-        //    {
-        //        TempData["success"] = $"{e} silme işlemi Başarısız Olmuştur";
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+            }
+            catch (DbUpdateException e)
+            {
+                TempData["success"] = $"{e} Silme işlemi Başarısız Olmuştur";
+            }
+            return RedirectToAction("Index");
+        }
         //public void DropdownFill()
         //{
         //    ViewBag.Feauture = new SelectList(context.Cars.OrderBy(p => p.CarName).ToList(), "Id", "CarName");
         //}
-
-        public void DropdownFill()
-        {
-            ViewBag.Feauture = new SelectList(context.Cars.OrderBy(p => p.CarName).ToList(), "Id", "CarName");
-        }
-
     }
 }

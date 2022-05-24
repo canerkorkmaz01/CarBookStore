@@ -100,12 +100,12 @@
                     </div>
 
                     <div class="form-row border">
-                        <div class="pl-5 col-12 form-group row ">
+                        <div class="pl-3 col-12 form-group row ">
                             @foreach (var feature in ViewBag.Feature as IEnumerable<Feature>)
                             {
-                                <div class=" custom-checkbox form-check form-check-inline">
-                                    <input type="checkbox" class="custom-control-input" id="feature_@feature.Id" name="CarFeature" value="@feature.Id">
-                                    <label class="custom-control-label pr-3" for="feature_@feature.Id">@feature.Name</label>
+                                <div class=" form-check form-check-inline">
+                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Id" name="CarFeature" value="@feature.Id">
+                                    <label class="form-check-label " for="feature_@feature.Id">@feature.Name</label>
                                 </div>
                             }
                         </div>
