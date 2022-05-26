@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CarBookStoreWeb.Areas.Admin.Controllers
 {
@@ -37,18 +37,20 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Feature = context.Features.ToList();
+            Cars();
+            ViewBag.CarFeatures = context.Features.OrderBy(p => p.Name).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name });
+
             return View();
         }
 
         [HttpPost]
-        public async Task <IActionResult> Create(Car model)
+        public async Task<IActionResult> Create(Car model)
         {
             if (model.PhotoFile != null)
             {
                 try
                 {
-                    using (var image =Image.Load(model.PhotoFile.OpenReadStream()))
+                    using (var image = Image.Load(model.PhotoFile.OpenReadStream()))
                     {
                         image.Mutate(p =>
                         {
@@ -79,7 +81,7 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                 {
                     try
                     {
-                        using (var image =Image.Load(photoFile.OpenReadStream()))
+                        using (var image = Image.Load(photoFile.OpenReadStream()))
                         {
                             image.Mutate(p =>
                             {
@@ -93,14 +95,14 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                                 {
                                     UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
                                     DateCreated = DateTime.Now,
-                                    Enabled=model.Enabled,
+                                    Enabled = model.Enabled,
                                     Photo = image.ToBase64String(JpegFormat.Instance)
                                 };
                                 model.CarPictures.Add(photo);
                                 context.Entry(photo).State = EntityState.Added;
-                                
+
                             });
-                        
+
                         }
                     }
                     catch (UnknownImageFormatException)
@@ -109,10 +111,10 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                     }
                 }
 
-            if(model.CarFeature != null)
+            if (model.SelectedFeatures != null)
             {
                 var features = await context.Features.ToListAsync();
-                model.CarFeature.ToList().ForEach(p => model.Features.Add(features.Single(q => q.Id == p)));
+                model.SelectedFeatures.ToList().ForEach(p => model.Features.Add(features.Single(q => q.Id == p)));
             }
 
             model.DateCreated = DateTime.Now;
@@ -133,14 +135,18 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task <IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
+            Cars();
             if (id == null)
             {
                 return NotFound();
             }
+
             var model = await context.Cars.FindAsync(id);
-           
+            var features = model.Features.ToList();
+            ViewBag.CarFeatures = context.Features.OrderBy(p => p.Name).ToList().Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name, Selected = features.Any(q => q.Id == p.Id) });
+
             return View(model);
         }
 
@@ -148,7 +154,7 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(Car model)
         {
             var original = await context.Cars.FindAsync(model.Id);
-           
+
             model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             context.Entry(original).CurrentValues.SetValues(model);
@@ -185,5 +191,15 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        private void Cars()
+        {
+            ViewBag.Feature = context.Features.ToList();
+        }
+
+        //private void Features(int? id)
+        //{
+        //    ViewBag.Features = context.Cars.Where(x=>x.CarFeatur)
+        //}
     }
 }

@@ -26,8 +26,13 @@ namespace CarBookData
         {
 
             builder
-                .HasIndex(p => new { p.Name })
-                .IsUnique();
+                .HasMany(p => p.Cars)
+                .WithMany(p => p.Features);
+            //    .LeftNavigation.
+
+            //builder
+            //    .HasIndex(p => new { p.Name })
+            //    .IsUnique();
 
             builder
                 .Property(p => p.Name)

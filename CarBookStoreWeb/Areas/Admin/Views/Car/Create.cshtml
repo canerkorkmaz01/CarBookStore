@@ -98,14 +98,13 @@
                             <span asp-validation-for="Plate"></span>
                         </div>
                     </div>
-
                     <div class="form-row border">
                         <div class="pl-3 col-12 form-group row ">
-                            @foreach (var feature in ViewBag.Feature as IEnumerable<Feature>)
+                            @foreach (var feature in ViewBag.CarFeatures as IEnumerable<SelectListItem>)
                             {
                                 <div class=" form-check form-check-inline">
-                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Id" name="CarFeature" value="@feature.Id">
-                                    <label class="form-check-label " for="feature_@feature.Id">@feature.Name</label>
+                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Value" name="CarFeatures" value="@feature.Value" @(feature.Selected ? "checked" : "" )>
+                                    <label class="form-check-label " for="feature_@feature.Value">@feature.Text</label>
                                 </div>
                             }
                         </div>

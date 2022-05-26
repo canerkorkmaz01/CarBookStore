@@ -56,8 +56,9 @@ namespace CarBookData
         public string Plate { get; set; }
 
         public string Photo { get; set; }
+
         [NotMapped]
-        public int[] CarFeature { get; set; }
+        public int[] SelectedFeatures { get; set; }
 
 
         [NotMapped]
