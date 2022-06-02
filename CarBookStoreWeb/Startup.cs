@@ -12,6 +12,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CarBookStoreWeb.Sys;
+using System.Globalization;
 
 namespace CarBookStoreWeb
 {
@@ -27,7 +28,10 @@ namespace CarBookStoreWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            //var cultureInfo = new CultureInfo("tr-TR");
+            //CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            //CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
             services.AddControllersWithViews()
 
             .AddNewtonsoftJson(options =>

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using X.PagedList;
 
 namespace CarBookStoreWeb.Areas.Admin.Controllers
 {
@@ -28,10 +29,10 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
             this.context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? page, int? pageSize)
         {
-            var carAll = context.Cars;
-            return View(carAll);
+            var model = await context.Cars.OrderBy(p => p.CarName).ToPagedListAsync(page ?? 1, pageSize ?? 10);
+            return View(model);
         }
 
         [HttpGet]
@@ -39,7 +40,6 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         {
             Cars();
             ViewBag.CarFeatures = context.Features.OrderBy(p => p.Name).Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name });
-
             return View();
         }
 

@@ -28,17 +28,17 @@ namespace CarBookData
               .Property(p => p.HourlyRate)
               .IsUnicode(false)
               .IsRequired()
-              .HasPrecision(18, 2);
+              .HasPrecision(18, 0);
             builder
              .Property(p => p.DailyWages)
              .IsUnicode(false)
              .IsRequired()
-             .HasPrecision(18, 2);
+             .HasPrecision(18, 0);
             builder
              .Property(p => p.MonthlyFee)
              .IsUnicode(false)
              .IsRequired()
-             .HasPrecision(18, 2);
+             .HasPrecision(18, 0);
         }
     }
 }

@@ -1,0 +1,146 @@
+﻿@model Reservation
+@{
+    ViewData["title"] = "Rezervasyonlar";
+}
+
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Rezervasyon Güncelle</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive " style="width:100%">
+
+            <div class="mt-2 container">
+                <form method="post" enctype="multipart/form-data">
+
+                    @if (!ViewContext.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            @Html.ValidationSummary()
+                        </div>
+                    }
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3 form-group">
+                            <label asp-for="CarId">Araç Seçiniz</label>
+                            <select asp-for="CarId" class="custom-select" asp-items="@ViewBag.Reservation">
+                                <option value="" selected disabled>Lütfen Araç Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="CarId"></span>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="NameSurname">Adınız Soyadınız</label>
+                            <input type="text" class="form-control" asp-for="NameSurname" placeholder="Adınız Soyadınızı Giriniz">
+                            <span asp-validation-for="NameSurname"></span>
+                        </div>
+
+
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label asp-for="Telephone">Telefon</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input type="text" asp-for="Telephone" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                    <span asp-validation-for="Telephone"> </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="Email" class="form-label">Email Adresi</label>
+                            <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Lütfen Email Adresi Giriniz">
+                            <span asp-validation-for="Email"></span>
+                        </div>
+
+                        <div class="col-md-4 mb-3 form-group">
+                            <label asp-for="GearType">Vites Türü</label>
+                            <select class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
+                                <option value="" selected disabled>Vites Seçiniz...</option>
+                            </select>
+                            <span asp-validation-for="GearType"></span>
+                        </div>
+                        <div class="col-md-4 mb-3 form-group">
+                            <label asp-for="FuelType">Yakıt Türü</label>
+                            <select class="custom-select" asp-for="FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()">
+                                <option value="" selected disabled>Yakıt Tipi Seçiniz...</option>
+                            </select>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label asp-for="RentalDate">Kiralama Tarihi</label>
+                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                    <input type="text" asp-for="RentalDate"  class="form-control datetimepicker-input" data-target="#reservationdate">
+
+                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="RentalDate"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label asp-for="PurchaseDate">Alış Tarihi</label>
+                                <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                                    <input type="text" asp-for="PurchaseDate"  class="form-control datetimepicker-input" data-target="#reservationdate1">
+
+                                    <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="PurchaseDate"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label asp-for="DeliveryDate">Teslim Tarihi</label>
+                                <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                                    <input type="text" asp-for="DeliveryDate" v class="form-control datetimepicker-input" data-target="#reservationdate2">
+
+                                    <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="DeliveryDate"></span>
+                        </div>
+                        <div class="col-md-4 mb-3 ml-4 form-group">
+                            <input asp-for="Enabled" class="form-check-input" type="checkbox">
+                            <label id="check" asp-for="Enabled" class="form-check-label">Pasif</label>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">
+                        <i class="fa fa-save"></i> Rezervasyon Güncelle
+                    </button>
+                    <a class="btn btn-link" asp-action="Index">İptal</a>
+                </form>
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/Projects.js"></script>
+}

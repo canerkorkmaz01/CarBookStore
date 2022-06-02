@@ -203,7 +203,9 @@ namespace MigrationSqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
@@ -229,9 +231,9 @@ namespace MigrationSqlServer.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("DailyWages")
-                        .HasPrecision(18, 2)
+                        .HasPrecision(18)
                         .IsUnicode(false)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,0)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -240,14 +242,14 @@ namespace MigrationSqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal>("HourlyRate")
-                        .HasPrecision(18, 2)
+                        .HasPrecision(18)
                         .IsUnicode(false)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,0)");
 
                     b.Property<decimal>("MonthlyFee")
-                        .HasPrecision(18, 2)
+                        .HasPrecision(18)
                         .IsUnicode(false)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,0)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -287,23 +289,21 @@ namespace MigrationSqlServer.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FuelType")
-                        .IsRequired()
-                        .HasMaxLength(200)
+                    b.Property<int>("FuelType")
+                        .HasMaxLength(50)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("Gear")
-                        .IsRequired()
-                        .HasMaxLength(200)
+                    b.Property<int>("GearType")
+                        .HasMaxLength(50)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("int");
 
                     b.Property<string>("NameSurname")
                         .IsRequired()
-                        .HasMaxLength(200)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
@@ -313,9 +313,9 @@ namespace MigrationSqlServer.Migrations
 
                     b.Property<string>("Telephone")
                         .IsRequired()
-                        .HasMaxLength(11)
+                        .HasMaxLength(14)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(11)");
+                        .HasColumnType("varchar(14)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

@@ -23,35 +23,38 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="text-nowrap">
+                            Araç Fotosu
+                        </th>
+                        <th class="text-nowrap">
                             Araç İsmi
                         </th>
-                        <th >
+                        <th class="text-nowrap">
                             Araç Yılı
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Kasa Tipi
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Yakıt Tipi
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Vites Türü
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Kilometre
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Koltuk Sayısı
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Valiz Sayısı
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Ehliyet
                         </th>
 
-                        <th >
+                        <th class="text-nowrap">
                             Araç Plakası
                         </th>
                         <th>
@@ -60,65 +63,71 @@
                         <th>
                             İşlem
                         </th>
-
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach (var cars in Model)
                     {
-                    <tr>
-                        <td>
-                            @cars.CarName
-                        </td>
-                        <td align="center">
-                            @cars.Year
-                        </td>
-                        <td align="center">
-                            @cars.Safe
-                        </td>
-                        <td align="center">
-                           @cars.FuelType
-                        </td>
-                        <td align="center">
-                           @cars.GearType                      
-                        </td>
-                        <td align="center">
-                           @cars.Kilometer
-                        </td>
-                        <td align="center">
-                           @cars.Armchair
-                        </td>
-                        <td align="center">
-                           @cars.SuitCase
-                        </td>
-                        <td align="center">
-                            @cars.Licence
-                        </td>
-                        <td align="center">
-                           @cars.Plate
-                        </td>
+                        <tr>
+                            <td class="text-nowrap">
+                                <img src="@cars.Photo" height="60" />
+                            </td>
+                            <td class="text-nowrap">
+                                @cars.CarName
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Year
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Safe
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.FuelType
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.GearType
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Kilometer
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Armchair
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.SuitCase
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Licence
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Plate
+                            </td>
 
-                        <td class="project-state">
-                            @if (cars.Enabled == true)
-                            {
-                                <span class="badge badge-success">Aktif</span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-danger">Pasif</span>
-                            }
-                        </td>
-                        <td>
-
-                            <partial name="RowButtonsPartial" model="@cars" />
-                            
-                        </td>
-                    </tr>
+                            <td class="project-state">
+                                @if (cars.Enabled == true)
+                                {
+                                    <span class="badge badge-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Pasif</span>
+                                }
+                            </td>
+                            <td>
+                                <partial name="RowButtonsPartial" model="@cars" />
+                            </td>
+                        </tr>
                     }
                 </tbody>
-
             </table>
+            <div class="py-2 d-flex justify-content-center">
+                @Html.PagedListPager(
+                (IPagedList)Model,
+                page => Url.Action("Index", new { page = page, pageSize = ViewContext.HttpContext.Request.Query["pageSize"] }),
+                Extensions.PagedListPagerOptions
+                )
+            </div>
         </div>
         <!-- /.card-body -->
     </div>

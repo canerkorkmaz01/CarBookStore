@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarBookStoreWeb.Enums;
 
 namespace CarBookData
 {
@@ -43,11 +44,11 @@ namespace CarBookData
 
         [Display(Name = "Yakıt Tipi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
-        public string FuelType { get; set; }
+        public FuelType FuelType { get; set; }
 
         [Display(Name = "Vites Tipi")]
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
-        public string Gear { get; set; }
+        public GearType GearType { get; set; }
         public virtual Car Cars { get; set; }
     }
 
@@ -59,12 +60,12 @@ namespace CarBookData
             builder
                 .Property(p => p.NameSurname)
                 .IsUnicode(false)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsRequired();
             builder
                .Property(p => p.Telephone)
                .IsUnicode(false)
-               .HasMaxLength(11)
+               .HasMaxLength(14)
                .IsRequired();
             builder
                .Property(p => p.Email)
@@ -74,16 +75,13 @@ namespace CarBookData
             builder
                .Property(p => p.FuelType)
                .IsUnicode(false)
-               .HasMaxLength(200)
+               .HasMaxLength(50)
                .IsRequired();
             builder
-                .Property(p => p.Gear)
+                .Property(p => p.GearType)
                 .IsUnicode(false)
-                .HasMaxLength(200)
+                .HasMaxLength(50)
                 .IsRequired();
-
-
-
         }
     }
 }

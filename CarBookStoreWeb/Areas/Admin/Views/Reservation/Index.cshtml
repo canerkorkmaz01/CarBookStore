@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Reservation>
+@{
     ViewData["title"] = "Rezervasyonlar";
 }
 <section class="content">
@@ -17,99 +18,107 @@
                 </button>
             </div>
         </div>
-        <div class="table-responsive " style="width:100%">
-            <a asp-controller="Reservation" asp-action="Create" class="btn btn-info float-right  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Rezervasyon Ekle</a>
+        <div class="table-responsive" style="width:100%">
+            <a asp-controller="Reservation" asp-action="Create" class="btn btn-info  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Rezervasyon Ekle</a>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="text-nowrap" >
                             Araç İsmi
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Müşteri Adı
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Telefonu
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             E-Mail
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Kiralama Tarihi
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Alış Tarihi
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Teslim Tarihi
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Yakıt Tipi
                         </th>
-                        <th>
+                        <th class="text-nowrap">
                             Vites Türü
                         </th>
-
+                        <th class="text-nowrap">
+                            Kaydı Yapan
+                        </th>
+                        <th class="text-nowrap">
+                            Kayıt Tarihi
+                        </th>
                         <th>
                             Durum
                         </th>
                         <th>
                             İşlem
                         </th>
-
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach (var Rezervasyon in Model)
+                    {
                     <tr>
-                        <td>
-                            Renault Clio 1.4
+                        <td class="text-nowrap">
+                            @Rezervasyon.Cars.CarName 
+                        </td>
+                        <td class="text-nowrap">
+                            @Rezervasyon.NameSurname
+                        </td>
+                        <td class="text-nowrap">
+                            @Rezervasyon.Telephone
+                        </td>
+                        <td class="text-nowrap">
+                            @Rezervasyon.Email
                         </td>
                         <td>
-                            Önay YALÇINER
+                            @Rezervasyon.RentalDate.ToShortDateString()
                         </td>
                         <td>
-
-                            0555 693 65 65
+                            @Rezervasyon.PurchaseDate.ToShortDateString()
                         </td>
                         <td>
-                            <span class="w-25">
-                                <small>onay.yalçıner@hotmail.com</small>
-                            </span>
+                            @Rezervasyon.DeliveryDate.ToShortDateString()
                         </td>
                         <td>
-                            11.04.2022
-
+                            @Rezervasyon.FuelType
                         </td>
                         <td>
-                            22.04.2022
+                            @Rezervasyon.GearType
+                        </td>
+                        <td class="text-nowrap">
+                            @Rezervasyon.User
                         </td>
                         <td>
-                            30.04.2022
+                            @Rezervasyon.DateCreated.ToShortDateString()
                         </td>
+                        @if (Rezervasyon.Enabled)
+                        {
+                            <td class="project-state">
+                                <span class="badge badge-success">Aktif</span>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="project-state">
+                                <span class="badge badge-danger">Pasif</span>
+                            </td>
+                        }
                         <td>
-                            Dizel
-                        </td>
-                        <td>
-                            Otomatik Vites
-                        </td>
-
-                        <td class="project-state">
-                            <span class="badge badge-success">Aktif</span>
-                        </td>
-                        <td>
-
-                            <a class="btn btn-info btn-sm" href="#">
-                                <span class="fas fa-pencil-alt"></span>
-                                Edit
-                            </a>
-                            <br />
-                            <a class="btn btn-danger btn-sm" href="#">
-                                <i class="fas fa-trash">
-                                </i>
-                                Sil
-                            </a>
+                            <partial name="RowButtonsPartial" model="@Rezervasyon" />
                         </td>
                     </tr>
+
+                    }
                 </tbody>
 
             </table>
