@@ -40,7 +40,7 @@ namespace CarBookStoreWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
             return View();
         }
@@ -106,31 +106,71 @@ namespace CarBookStoreWeb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
-            var model = new LoginViewModel { RememberMe = true };
+            var model =  new LoginViewModel { RememberMe = true };
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+
+
             var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
-            if (result.Succeeded)
+            var user = await userManager.FindByNameAsync(model.UserName);
+
+            if (!user.Enabled)
             {
-                var user = await userManager.FindByNameAsync(model.UserName);
-                if (!user.Enabled)
-                {
-                    ModelState.AddModelError("", "Yasaklı kullanıcı girişi");
-                    return View(model);
-                }
-                return Redirect(model.ReturnUrl ?? "/");
+                ModelState.AddModelError("", "Yasaklı kullanıcı girişi");
+
+                return RedirectToAction("Login", "Account");
             }
             else
             {
-                ModelState.AddModelError("", "Geçersiz kullanıcı girişi");
-                return View(model);
+                if (result.Succeeded)
+                {
+                    return Redirect(model.ReturnUrl ?? "/");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Geçersiz kullanıcı girişi");
+                    return View(model);
+
+                }
+                
             }
+           
+
+           
+          
+
+
+
+
+
+
+
+
+            //var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+            //if (result.Succeeded )
+            //{
+            //    var user = await userManager.FindByNameAsync(model.UserName);
+            //    if (!user.Enabled)
+            //    {
+            //        ModelState.AddModelError("", "Yasaklı kullanıcı girişi");
+
+            //        return RedirectToAction("Login", "Account");
+            //    }
+            //    return Redirect(model.ReturnUrl ?? "/");
+
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("", "Geçersiz kullanıcı girişi");
+            //    return View(model);
+
+            //}
         }
 
         public async Task<IActionResult> Logout()

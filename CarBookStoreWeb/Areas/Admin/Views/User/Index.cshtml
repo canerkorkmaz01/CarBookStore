@@ -1,0 +1,134 @@
+﻿@model IEnumerable<User>
+@inject UserManager<User> userManager
+@{ ViewData["Title"] = "Personeller"; }
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Personel Listesi</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive " style="width:100%">
+            @*<a asp-controller="Car" asp-action="Create" class="btn btn-info  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Araç Ekle</a>*@
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-nowrap">
+                            Personel Adı
+                        </th>
+                        <th class="text-nowrap">
+                            Kullanıcı Adı
+                        </th>
+                        <th>
+                            Aktif
+                        </th>
+                        <th>
+                            Durum
+                        </th>
+                        <th>
+                            İşlem
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        var roleName = (await userManager.GetRolesAsync(user)).First();
+                        <tr>
+                            <td class="text-nowrap">
+                                @user.Name
+                            </td>
+                            <td class="text-nowrap" align="left">
+                                @user.UserName
+                            </td>
+                            <td>
+                                <div class=" form-check form-check-inline " id="box">
+                                    <input type="checkbox" asp-for="@user.Enabled" class="form-check-input user-status-check" id="users" value="@user.Id">
+                                    <label class="form-check-label "></label>
+                                </div>
+                            </td>
+                            <td class="project-state user-status-label">
+                                @if (user.Enabled == true)
+                                {
+                                    <span class="badge badge-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Pasif</span>
+                                }
+                            </td>
+                            <td class="d-flex">
+                                <a class="btn btn-info btn-sm user-update" id="@user.Id" data-id="@user.Id">
+                                    <span class="fas fa-pencil-alt">Güncelle</span>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @*<div class="py-2 d-flex justify-content-center">
+                    @Html.PagedListPager(
+                    (IPagedList)Model,
+                    page => Url.Action("Index", new { page = page, pageSize = ViewContext.HttpContext.Request.Query["pageSize"] }),
+                    Extensions.PagedListPagerOptions
+                    )
+                </div>*@
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+@section Scripts {
+    <script>
+        $(document).on("click", ".user-update", function (event) {
+
+            var row = $(this).closest("tr");
+            var userId = $(row).find(".user-update").attr("data-id");
+            var checkbox = $(row).find(`.user-status-check`);
+            var label = $(row).find(`.user-status-label`);
+
+            $.ajax({
+                type: "POST",
+                url: `./Edit/`,
+                //url: `/User/Edit/${userId}`,
+                data: { id: userId },// $('#studentInfoId').serialize(),
+                dataType : 'JSON',
+                //contentType: ' charset=UTF-8',
+                success: function (response) {
+                    checkbox.prop('checked', response);
+                    label.html(response ?
+                        `<span class="badge badge-success">Aktif</span>` :
+                        `<span class="badge badge-danger">Pasif</span>`);
+                },
+                error: function () {
+                    alert('hata ');
+                    console.log('Failed ');
+                }
+            });
+        });
+
+                //var post = function (id) {
+
+                //    if ($('#users').is(':checked')) {
+                //        $("#check").text("Aktif");
+                //    }
+
+
+                //};
+    </script>
+}

@@ -87,7 +87,7 @@
 //})
 
 // DropzoneJS Demo Code Start
-Dropzone.autoDiscover = false
+//Dropzone.autoDiscover = false
 
 // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
 var previewNode = document.querySelector("#template")
