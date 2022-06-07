@@ -58,21 +58,22 @@
                                     <label class="form-check-label "></label>
                                 </div>
                             </td>
-                            <td class="project-state user-status-label">
+                            <td class="project-state user-status-label" >
                                 @if (user.Enabled == true)
                                 {
-                                    <span class="badge badge-success">Aktif</span>
+                                    <span id="box" class="badge badge-success">Aktif</span>
                                 }
                                 else
                                 {
-                                    <span class="badge badge-danger">Pasif</span>
+                                    <span id="box2" class="badge badge-danger">Pasif</span>
                                 }
                             </td>
                             <td class="d-flex">
                                 <a class="btn btn-info btn-sm user-update" id="@user.Id" data-id="@user.Id">
                                     <span class="fas fa-pencil-alt">Güncelle</span>
                                 </a>
-                                <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">
+                                &nbsp;
+                                <a data-name="@user.Name" class="btn btn-danger btn-sm user-delete" data-id="@user.Id">
                                     <i class="fas fa-trash"></i> Sil
                                 </a>
                             </td>
@@ -96,19 +97,14 @@
 @section Scripts {
     <script>
         $(document).on("click", ".user-update", function (event) {
-
             var row = $(this).closest("tr");
             var userId = $(row).find(".user-update").attr("data-id");
             var checkbox = $(row).find(`.user-status-check`);
             var label = $(row).find(`.user-status-label`);
 
             $.ajax({
-                type: "POST",
-                url: `./Edit/`,
-                //url: `/User/Edit/${userId}`,
-                data: { id: userId },// $('#studentInfoId').serialize(),
-                dataType : 'JSON',
-                //contentType: ' charset=UTF-8',
+                type: "GET",
+                url: `./User/Edit/` + userId,
                 success: function (response) {
                     checkbox.prop('checked', response);
                     label.html(response ?
@@ -122,13 +118,35 @@
             });
         });
 
-                //var post = function (id) {
+        $(document).on("click", ".user-delete", function (events) {
+           
+            var id = $(this).data("id");
+            var btn = $(this);
+            var name = $(this).attr("data-name");
+            Swal.fire({
+                icon: 'warning',
+                title: 'UYARI',
+                html: `<strong>"${name}"</strong> isimli Kullanıcı tamamen silinecektir. Silme işlemine devam etmek istiyormusunuz?`,
+                cancelButtonText: 'İptal',
+                confirmButtonText: '<i class="fa fa-trash"></i> Sil',
+                showCancelButton: true
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        type: "GET",
+                        url: `./User/Delete/` + id,
+                        success: function () {
+                            btn.parent().parent().remove();
+                        },
+                        error: function () {
+                            alert('hata ');
+                        }
+                    });
+                }
+            });
+            return false;
+        });
 
-                //    if ($('#users').is(':checked')) {
-                //        $("#check").text("Aktif");
-                //    }
-
-
-                //};
     </script>
 }
+

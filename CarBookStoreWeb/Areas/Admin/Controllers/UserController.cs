@@ -1,6 +1,7 @@
 ﻿using CarBookData;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +27,23 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
             return View(users);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var user = context.Users.Find(id);
             user.Enabled = !user.Enabled;
-            context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.Entry(user).State = EntityState.Modified;
             context.SaveChanges();
             return Json(user.Enabled);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var user = context.Users.Find(id);
+            context.Entry(user).State = EntityState.Deleted;
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
