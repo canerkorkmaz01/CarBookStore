@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Contact>
+@{ ViewData["Title"] = "Adres Bilgisi"; }
+
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Adres Bilgisi</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive " style="width:100%">
+            <a asp-controller="Contact" asp-action="Create" class="btn btn-info mt-2 mb-2 ml-2 "> <span class=" fas fa-plus"></span> Adres Ekle</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-nowrap">
+                            Adres
+                        </th>
+                        <th class="text-nowrap">
+                            E Mail
+                        </th>
+                        <th class="text-nowrap">
+                           Mesaj
+                        </th>
+                        <th class="text-nowrap">
+                            Kaydı Yapan
+                        </th>
+                        <th class="text-nowrap">
+                            Kayıt Tarihi
+                        </th>
+                        <th>
+                            Durum
+                        </th>
+                        <th>
+                            İşlem
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var contact in Model)
+                    {
+                        <tr>
+                            <td class="text-nowrap" align="center">
+                               @contact.Address
+                            </td>
+                            <td class="text-nowrap" align="center">
+                               @contact.Email
+                            </td>
+                            <td class="text-nowrap" align="center">
+                               @contact.Telephone
+                            </td>
+                            <td class="text-nowrap" align="center">
+                               @contact.User
+                            </td>
+                            <td class="text-nowrap" align="center">
+                               @contact.DateCreated 
+                            </td>
+                            <td class="project-state">
+                                @if (contact.Enabled)
+                                {
+                                    <span class="badge badge-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Pasif</span>
+                                }
+                            </td>
+                            <td class="d-flex">
+                                <partial name="RowButtonsPartial" model="@contact" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="py-2 d-flex justify-content-center">
+                @*@Html.PagedListPager(
+                (IPagedList)Model,
+                page => Url.Action("Index", new { page = page, pageSize = ViewContext.HttpContext.Request.Query["pageSize"] }),
+                Extensions.PagedListPagerOptions
+                )*@
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>

@@ -46,6 +46,9 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Car model)
         {
+
+          
+
             if (model.PhotoFile != null)
             {
                 try
@@ -116,6 +119,7 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                 var features = await context.Features.ToListAsync();
                 model.SelectedFeatures.ToList().ForEach(p => model.Features.Add(features.Single(q => q.Id == p)));
             }
+
 
             model.DateCreated = DateTime.Now;
             model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);

@@ -209,7 +209,7 @@
                         <img src="~/lib/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Önay YALÇINER</a>
+                        <a href="#" class="d-block">@User.FindFirst(ClaimTypes.Name).Value</a>
                     </div>
                 </div>
 
@@ -280,7 +280,16 @@
                             <a asp-controller="User" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    PERSONELLER
+                                    Personeller
+                                    @*<span class="right badge badge-danger">New</span>*@
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Contact" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-address-book"></i>
+                                <p>
+                                    Adres Yönetimi
                                     @*<span class="right badge badge-danger">New</span>*@
                                 </p>
                             </a>

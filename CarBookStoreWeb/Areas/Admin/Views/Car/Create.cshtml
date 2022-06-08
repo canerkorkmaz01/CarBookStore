@@ -102,7 +102,7 @@
                             @foreach (var feature in ViewBag.CarFeatures as IEnumerable<SelectListItem>)
                             {
                                 <div class=" form-check form-check-inline">
-                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Value" name="CarFeatures" value="@feature.Value" @(feature.Selected ? "checked" : "" )>
+                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Value" name="SelectedFeatures" value="@feature.Value" @(feature.Selected ? "checked" : "" )>
                                     <label class="form-check-label " for="feature_@feature.Value">@feature.Text</label>
                                 </div>
                             }

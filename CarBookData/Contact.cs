@@ -11,10 +11,9 @@ namespace CarBookData
 {
     public class Contact:BaseEntity
     {
-        public string Name { get; set; }
+        public string Address { get; set; }
         public string Email { get; set; }
-        public string Subject { get; set; }
-        public string Message { get; set; }
+        public string Telephone { get; set; }
     }
     public class ContactEntityTypeConfiguration : IEntityTypeConfiguration<Contact>
     {
