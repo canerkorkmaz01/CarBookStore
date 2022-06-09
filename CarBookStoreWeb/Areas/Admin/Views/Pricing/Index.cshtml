@@ -46,7 +46,7 @@
                         <th>
                            Aktif
                         </th>
-                        <th>
+                        <th class="d-flex justify-content-center">
                             İşlemler
                         </th>
                     </tr>
@@ -59,7 +59,7 @@
                         <td class="project-state" align="left">
                             @pricing.Cars.CarName
                         </td>
-                        <td class="project-state" align="left">
+                        <td class="project-state" align="left" >
                             @pricing.HourlyRate
                         </td>
                         <td class="project-state" align="left">
@@ -86,7 +86,7 @@
                                 <span class="badge badge-danger">Yok</span>
                             </td>
                         }
-                        <td>
+                        <td class="d-flex justify-content-center">
                             <partial name="RowButtonsPartial" model="@pricing" />
                         </td>
                     </tr>

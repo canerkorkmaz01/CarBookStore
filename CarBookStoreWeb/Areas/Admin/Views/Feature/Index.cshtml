@@ -32,12 +32,12 @@
                            Kayıt Tarihi
                         </th>
                         <th>
-                            Durum
-                        </th>
-                        <th>
                             Kaydı Yapan
                         </th>
                         <th>
+                            Durum
+                        </th>
+                        <th class="d-flex justify-content-center">
                             İşlemler
                         </th>
                     </tr>
@@ -58,7 +58,7 @@
                         </td>
                         @if (feature.Enabled)
                         {
-                            <td class="project-state" align="left">
+                            <td class="project-state" align="left" >
                                 <span class="badge badge-success sp">Var</span>
                             </td>
                         }
@@ -68,7 +68,7 @@
                                 <span class="badge badge-danger">Yok</span>
                             </td>
                         }
-                        <td>
+                        <td class="d-flex justify-content-center">
                             <partial name="RowButtonsPartial" model="@feature" />
                         </td>
                     </tr>
