@@ -29,7 +29,7 @@
                             @Html.ValidationSummary()
                         </div>
                     }
-
+                    
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label asp-for="CarName">Araç Giriniz</label>
@@ -112,12 +112,16 @@
                     </div>
                     <div class="form-row">
                         <div class="col-12 form-group">
-                            <label asp-for="PhotoFile"></label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="PhotoFile" name="PhotoFile" accept="image/*">
-                                <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
+                            <label asp-for="Photo"></label>
+                            <div class="custom-file" id="main">
+                                <input type="file" asp-for="Photo" class="custom-file-input" id="PhotoFile" name="PhotoFile" accept="image/*">
+                                <label asp-for="Photo" class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
                             </div>
-                            <img id="PhotoPreview" src="" height="200" class="p-2 my-2 border d-none" />
+                            <div id="photoOne" class="d-flex flex-wrap py-2">
+                                <div id="hover-select" class="p-2 border mr-2">
+                                    <img id="PhotoPreview" src="@Model.Photo" height="200" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -128,7 +132,12 @@
                                 <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
                             </div>
                             <div id="photoGallery" class="d-flex flex-wrap py-2">
-
+                               @foreach (var carPicture in ViewBag.CarPicture as IEnumerable<CarPicture>)
+                               {
+                                <div id="select-hover" class="p-2 border mr-2 hover-del">
+                                    <img src="@carPicture.Photo" height="120" />
+                                </div>
+                               }
                             </div>
                         </div>
                     </div>
@@ -156,9 +165,10 @@
             $('#PhotoFile').change(function () {
                 var reader = new FileReader();
                 reader.onloadend = function (event) {
-                    $('#PhotoPreview').attr('src', reader.result).removeClass('d-none');
-
+                    $('#PhotoPreview').attr('src', reader.result).removeClass('del');
+                    $('#photoOne').append('<div id="hover-select" class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="200" /></div>')
                 }
+              
                 reader.readAsDataURL(document.getElementById("PhotoFile").files[0]);
             });
 
@@ -169,11 +179,22 @@
                     console.log(i);
                     var reader = new FileReader();
                     reader.onloadend = function (event) {
-                        $('#photoGallery').append('<div class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="120" /></div>')
+                        $('#photoGallery').append('<div id="select-hover" class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="120" /></div>')
                     }
                     reader.readAsDataURL(files[i]);
                 }
             });
+
+            $(document).ready(function () {
+                $("#photoGallery").click(function () {
+                    $("#select-hover").remove();
+                });
+
+                $("#photoOne").click(function () {
+                    $("#hover-select").remove();
+                });
+            });
+     
 
             //$('.summernote').summernote({
             //    height: 400

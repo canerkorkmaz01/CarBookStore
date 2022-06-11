@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace CarBookStoreWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Administrators,Staff")]
+    [Authorize(Roles = "Administrators")]
     public class PricingController : Controller
     {
         private const string entityName = "Araç Fiyatlandırma";

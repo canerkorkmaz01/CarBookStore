@@ -16,7 +16,7 @@ using X.PagedList;
 namespace CarBookStoreWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Administrators,Staff")]
+    [Authorize(Roles = "Administrators")]
     public class CarController : Controller
     {
         private const string entityName = "Araç Ekleme";
@@ -47,9 +47,7 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Car model)
         {
 
-          
-
-            if (model.PhotoFile != null)
+           if (model.PhotoFile != null)
             {
                 try
                 {
@@ -150,7 +148,7 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
             var model = await context.Cars.FindAsync(id);
             var features = model.Features.ToList();
             ViewBag.CarFeatures = context.Features.OrderBy(p => p.Name).ToList().Select(p => new SelectListItem { Value = p.Id.ToString(), Text = p.Name, Selected = features.Any(q => q.Id == p.Id) });
-
+            ViewBag.CarPicture = context.CarPictures.Where(q=>q.CarId==id).ToList();
             return View(model);
         }
 

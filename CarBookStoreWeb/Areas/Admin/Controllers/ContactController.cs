@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CarBookStoreWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Administrators,Staff")]
+    [Authorize(Roles = "Administrators")]
     public class ContactController : Controller
     {
         private const string entityname="Adres";

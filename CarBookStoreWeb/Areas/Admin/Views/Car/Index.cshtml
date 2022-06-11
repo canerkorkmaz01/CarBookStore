@@ -19,7 +19,11 @@
             </div>
         </div>
         <div class="table-responsive " style="width:100%">
-            <a asp-controller="Car" asp-action="Create" class="btn btn-info float-right  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Araç Ekle</a>
+            @if (User.IsInRole("Administrators"))
+            {
+                <a asp-controller="Car" asp-action="Create" class="btn btn-info mt-2 mb-2 "> <span class=" fas fa-plus"></span> Araç Ekle</a>
+            }
+           
             <table class="table">
                 <thead>
                     <tr>
