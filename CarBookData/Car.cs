@@ -55,6 +55,9 @@ namespace CarBookData
         [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string Plate { get; set; }
 
+        [NotMapped]
+        public int[] PicturesToDeleted { get; set; }
+
         public string Photo { get; set; }
 
         [NotMapped]

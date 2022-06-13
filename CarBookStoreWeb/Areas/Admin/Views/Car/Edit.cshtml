@@ -29,7 +29,7 @@
                             @Html.ValidationSummary()
                         </div>
                     }
-                    
+
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label asp-for="CarName">Araç Giriniz</label>
@@ -94,17 +94,18 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationTooltip01" asp-for="Plate">Araç Plakası</label>
-                            <input type="text" asp-for="Plate" class="form-control" placeholder="Araç Adı" value="" required>
+                            <input type="text" asp-for="Plate" class="form-control" placeholder="Araç Adı" required>
                             <span asp-validation-for="Plate"></span>
                         </div>
                     </div>
 
                     <div class="form-row border">
                         <div class="pl-3 col-12 form-group row ">
+
                             @foreach (var feature in ViewBag.CarFeatures as IEnumerable<SelectListItem>)
                             {
                                 <div class=" form-check form-check-inline">
-                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Value" name="CarFeatures" value="@feature.Value" @(feature.Selected ? "checked" : "" )>
+                                    <input type="checkbox" class="form-check-input" id="feature_@feature.Value" name="SelectedFeatures" value="@feature.Value" @(feature.Selected ? "checked" : "" )>
                                     <label class="form-check-label " for="feature_@feature.Value">@feature.Text</label>
                                 </div>
                             }
@@ -112,15 +113,17 @@
                     </div>
                     <div class="form-row">
                         <div class="col-12 form-group">
-                            <label asp-for="Photo"></label>
+                            <label asp-for="PhotoFile"></label>
                             <div class="custom-file" id="main">
-                                <input type="file" asp-for="Photo" class="custom-file-input" id="PhotoFile" name="PhotoFile" accept="image/*">
-                                <label asp-for="Photo" class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
+                                <input type="file" class="custom-file-input" id="PhotoFile" name="PhotoFile" accept="image/*">
+                                <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
                             </div>
                             <div id="photoOne" class="d-flex flex-wrap py-2">
-                                <div id="hover-select" class="p-2 border mr-2">
-                                    <img id="PhotoPreview" src="@Model.Photo" height="200" />
-                                </div>
+                            
+                                    <div id="hover-select" class="p-2 border mr-2">
+                                        <img id="PhotoPreview" src="@Model.Photo" height="200" />
+                                    </div>
+
                             </div>
                         </div>
                     </div>
@@ -132,12 +135,12 @@
                                 <label class="custom-file-label" for="customFile" data-browse="Dosya Seç">dosya seçiniz...</label>
                             </div>
                             <div id="photoGallery" class="d-flex flex-wrap py-2">
-                               @foreach (var carPicture in ViewBag.CarPicture as IEnumerable<CarPicture>)
-                               {
-                                <div id="select-hover" class="p-2 border mr-2 hover-del">
-                                    <img src="@carPicture.Photo" height="120" />
-                                </div>
-                               }
+                                @foreach (var carPicture in ViewBag.CarPicture as IEnumerable<CarPicture>)
+                                {
+                                    <div id="select-hover" class="p-2 border mr-2 hover-del">
+                                        <img id="PhotoPreview" src="@carPicture.Photo" height="120" />
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -145,7 +148,7 @@
                         <input asp-for="Enabled" class="form-check-input" type="checkbox">
                         <label id="check" asp-for="Enabled" class="form-check-label"></label>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">
+                    <button type="submit" class="btn btn-primary mb-2" id="btn-save-image">
                         <i class="fa fa-save"></i> Kaydet
                     </button>
                     <a class="btn btn-link" asp-action="Index">İptal</a>
@@ -162,16 +165,37 @@
     <script src="~/js/Projects.js"></script>
     <script>
         $(() => {
-            $('#PhotoFile').change(function () {
+
+            @*var den = @Model.Photo;
+            //var image = $('#hiden').attr('src');
+            //$("#PhotoPreview").attr('src', image);
+
+
+            alert(den);
+
+            $("#btn-save-image").click(function () {
+                //alert(image);
+                //$('#photoOne').append('<div id="hover-select" class="p-2 border mr-2"><img src="' + image + '" height="200" /></div>')
+
+                var reader = new FileReader();
+
+                reader= function (event) {
+                    $('#photoOne').append('<div id="hover-select" class="p-2 border mr-2"><img src="' + image + '" height="200" /></div>')
+                }
+                
+                reader.readAsDataURL(document.getElementById("PhotoFile").files[0]);
+               
+            });*@
+
+
+            $('#PhotoFile').on('change',function () {
                 var reader = new FileReader();
                 reader.onloadend = function (event) {
-                    $('#PhotoPreview').attr('src', reader.result).removeClass('del');
                     $('#photoOne').append('<div id="hover-select" class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="200" /></div>')
                 }
-              
                 reader.readAsDataURL(document.getElementById("PhotoFile").files[0]);
             });
-
+            
             $('#PhotoFiles').change(function () {
                 var files = document.getElementById("PhotoFiles").files;
 
@@ -186,20 +210,17 @@
             });
 
             $(document).ready(function () {
-                $("#photoGallery").click(function () {
+                $("#photoGallery").dblclick(function () {
                     $("#select-hover").remove();
                 });
 
-                $("#photoOne").click(function () {
+                $("#photoOne").dblclick(function () {
                     $("#hover-select").remove();
                 });
             });
-     
-
             //$('.summernote').summernote({
             //    height: 400
             //});
-
         });
     </script>
 }
