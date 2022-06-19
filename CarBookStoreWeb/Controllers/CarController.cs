@@ -13,13 +13,18 @@ namespace CarBookStoreWeb.Controllers
     
     public class CarController : Controller
     {
+        private const string entityName="";
+        private readonly AppDbContext context;
+
+        public CarController(AppDbContext context)
+        {
+            this.context = context; 
+        }
      
-
-       
-
         public IActionResult Index()
         {
-            return View();
+            var carsList = context.Cars.OrderBy(q => q.CarName).ToList();
+            return View(carsList);
         }
 
        

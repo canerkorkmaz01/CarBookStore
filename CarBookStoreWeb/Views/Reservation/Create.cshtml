@@ -1,0 +1,212 @@
+﻿@model Reservation
+@{
+
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+    ViewData["Title"] = "Rezervasyon";
+}
+<partial name="NavPartial" />
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a asp-controller="Home" asp-action="Index">Anasayfa <i class="ion-ios-arrow-forward"></i></a></span> <span>Rezervasyon <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Rezervasyon Yap</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+*<div class="mt-2 container">
+    <form method="post" enctype="multipart/form-data">
+
+
+        @if (!ViewContext.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary()
+            </div>
+        }
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3 form-group">
+                <label asp-for="CarId">Araç Seçiniz</label>
+                <select asp-for="CarId" class="custom-select" asp-items="@ViewBag.Reservation" selected>
+                </select>
+                <span asp-validation-for="CarId"></span>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="NameSurname">Adınız Soyadınız</label>
+                <input type="text" class="form-control" asp-for="NameSurname" placeholder="Adınız Soyadınızı Giriniz">
+                <span asp-validation-for="NameSurname"></span>
+            </div>
+
+
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <label asp-for="Telephone">Telefon</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                        </div>
+                        <input type="text" asp-for="Telephone" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                        <span asp-validation-for="Telephone"> </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label asp-for="Email" class="form-label">Email Adresi</label>
+                <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Lütfen Email Adresi Giriniz">
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="col-md-4 mb-3 form-group">
+                <label asp-for="GearType">Vites Türü</label>
+                <select class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
+                    <option value="" selected disabled>Vites Seçiniz...</option>
+                </select>
+                <span asp-validation-for="GearType"></span>
+            </div>
+            <div class="col-md-4 mb-3 form-group">
+                <label asp-for="FuelType">Yakıt Türü</label>
+                <select class="custom-select" asp-for="FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()">
+                    <option value="" selected disabled>Yakıt Tipi Seçiniz...</option>
+                </select>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <label asp-for="RentalDate">Kiralama Tarihi</label>
+                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="text" asp-for="RentalDate" value="" class="form-control datetimepicker-input" data-target="#reservationdate">
+
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar" id="rentdate"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <span asp-validation-for="RentalDate"></span>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <label asp-for="PurchaseDate">Alış Tarihi</label>
+                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                        <input type="text" asp-for="PurchaseDate" value="" class="form-control datetimepicker-input" data-target="#reservationdate1">
+
+                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <span asp-validation-for="PurchaseDate"></span>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <label asp-for="DeliveryDate">Teslim Tarihi</label>
+                    <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                        <input type="text" asp-for="DeliveryDate" value="" class="form-control datetimepicker-input" data-target="#reservationdate2">
+
+                        <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <span asp-validation-for="DeliveryDate"></span>
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i> Rezervasyon Yap
+        </button>
+        <a class="btn btn-link" asp-controller="Home" asp-action="Index">İptal</a>
+    </form>
+</div>
+
+<section class="ftco-section bg-light mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-1.jpg); ">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        $(function () {
+            $("#rentdate").datepicker({
+                monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+                dayNames: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"],
+                dayNamesMin: ["Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts"],
+                prevText: "Geri",
+                nextText: "İleri",
+                firstDay: 1,
+                dateFormat: "dd.mm.yy"
+            });
+        });
+
+
+        //$.fn.datepicker.dates['tr'] =
+        //{
+        //    days: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"],
+        //    daysShort: ["Pz", "Pzt", "Sal", "Çrş", "Prş", "Cu", "Cts", "Pz"],
+        //    daysMin: ["Pz", "Pzt", "Sa", "Çr", "Pr", "Cu", "Ct", "Pz"],
+        //    months: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+        //    monthsShort: ["Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"],
+        //    today: "Bugün",
+        //    suffix: [],
+        //    meridiem: []
+        //};
+
+        //$("#rentdate").datepicker(
+        //    {
+               
+        //        format: "DD-MM-YYYY",
+        //        icons: {
+        //            time: 'far fa-clock'
+        //        },
+        //        startDate: new Date()
+        //    });
+
+
+
+        //$('#reservationdate').datetimepicker
+        //    ({
+        //        format: 'DD-MM-YYYY',
+        //        icons: {
+        //            time: 'far fa-clock'
+        //        }
+        //    });
+
+
+        //$(document).ready(function () {
+
+        //    var userLang = navigator.language || navigator.userLanguage;
+
+        //    var options = $.extend({}, // empty object
+        //        $.datepicker.regional[userLang], {
+        //            dateFormat: "DD-MM-YYYY"
+        //    } // your custom options
+        //    );
+
+        //    $("#reservationdate").datepicker(options);
+        //});
+    </script>
+}
+
+

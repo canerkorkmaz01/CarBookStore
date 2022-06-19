@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarBookData;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +10,31 @@ namespace CarBookStoreWeb.Controllers
 {
     public class ReservationController : Controller
     {
-        
+        private const string EntityName= "";
+        private readonly AppDbContext context;
+
+        public ReservationController(AppDbContext context)
+        {
+            this.context = context;
+        }
+
+
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Reservation()
+        [HttpGet]
+        public IActionResult Create(int id)
         {
+            DropdownFill(id);
             return View();
+        }
+
+        private void DropdownFill(int id)
+        {
+            ViewBag.Reservation = new SelectList(context.Cars.Where(q=>q.Id==id),"Id","CarName");
         }
     }
 }

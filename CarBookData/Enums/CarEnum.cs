@@ -12,7 +12,9 @@ namespace CarBookStoreWeb.Enums
         [Display(Name = "Sedan")]
         Sedan,
         [Display(Name = "Hacpek")]
-        Hackpek
+        Hackpek,
+        [Display(Name = "Jeep")]
+        Jeep
     }
     public enum FuelType
     {

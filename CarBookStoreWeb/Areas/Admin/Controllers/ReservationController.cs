@@ -106,7 +106,7 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                 TempData["error"] = $"{entityName} Silme İşleminde Hata Oluştu";
                 return View("Index");
             }
-            return View(model);
+          
         }
 
         public void DropdownFill()

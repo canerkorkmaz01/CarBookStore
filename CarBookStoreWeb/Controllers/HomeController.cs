@@ -1,4 +1,5 @@
-﻿using CarBookStoreWeb.Models;
+﻿using CarBookData;
+using CarBookStoreWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,10 +12,18 @@ namespace CarBookStoreWeb.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private  const string entityName = "";
+        private readonly AppDbContext context;
+
+        public HomeController(AppDbContext context)
+        {
+            this.context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var model = context.Cars.OrderBy(q => q.CarName).ToList();
+            return View(model);
         }
 
         public IActionResult About()

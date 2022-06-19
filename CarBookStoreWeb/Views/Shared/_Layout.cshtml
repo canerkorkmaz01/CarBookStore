@@ -21,35 +21,38 @@
     <link rel="stylesheet" href="~/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="~/css/jquery.timepicker.css">
 
-
     <link rel="stylesheet" href="~/css/flaticon.css">
     <link rel="stylesheet" href="~/css/icomoon.css">
     <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/lib/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/lib/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="~/lib/plugins/fontawesome-free/css/all.min.css">
+
 </head>
 <body>
 
     @*<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
 
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index" class="nav-link">Anasayfa</a></li>
-                    <li class="nav-item"><a asp-action="About" class="nav-link">Hakkında</a></li>
-                    <li class="nav-item"><a asp-action="Services" class="nav-link">Hizmetler</a></li>
-                    <li class="nav-item"><a asp-controller="Pricing" asp-action="Pricing" class="nav-link">Fiyatlandırma</></a></li>
-                    <li class="nav-item"><a asp-controller="Car" asp-action="Cars" class="nav-link">Arabalar</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">İletişim</a></li>
-                   
-                </ul>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a href="index" class="nav-link">Anasayfa</a></li>
+                        <li class="nav-item"><a asp-action="About" class="nav-link">Hakkında</a></li>
+                        <li class="nav-item"><a asp-action="Services" class="nav-link">Hizmetler</a></li>
+                        <li class="nav-item"><a asp-controller="Pricing" asp-action="Pricing" class="nav-link">Fiyatlandırma</></a></li>
+                        <li class="nav-item"><a asp-controller="Car" asp-action="Cars" class="nav-link">Arabalar</a></li>
+                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link">İletişim</a></li>
+
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>*@
-    <!-- END nav -->  
+        </nav>*@
+    <!-- END nav -->
 
     <div class="hero-wrap ftco-degree-bg" style="background-image: url('/images/bg_1.jpg')" data-stellar-background-ratio="0.5">
 
@@ -165,6 +168,23 @@
     @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>*@
     <script src="~/js/google-map.js"></script>
     <script src="~/js/main.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
+
+    <script src="~/lib/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+
+    <script src="~/lib/plugins/moment/moment.min.js"></script>
+    <script src="~/lib/plugins/inputmask/jquery.inputmask.min.js"></script>
+
+    <script src="~/lib/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <script src="~/lib/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+
+    <script src="~/lib/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

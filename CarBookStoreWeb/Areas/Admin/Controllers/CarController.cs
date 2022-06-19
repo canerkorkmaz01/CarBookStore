@@ -196,12 +196,12 @@ namespace CarBookStoreWeb.Areas.Admin.Controllers
                     return View(model);
                 }
             }
-            //else
-            //{
-            //    Features(model.Id);
-            //    ModelState.AddModelError("", "Lütfen bir logo yükleyiniz!");
-            //    return View(model);
-            //}
+            else
+            {
+                Features(model.Id);
+                ModelState.AddModelError("", "Lütfen bir logo yükleyiniz!");
+                return View(model);
+            }
 
             if (model.PhotoFiles != null)
                 foreach (var photoFile in model.PhotoFiles)
