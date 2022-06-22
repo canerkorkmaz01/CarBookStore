@@ -1418,9 +1418,9 @@
 	$.fn.datepicker.Constructor = Datepicker;
 	var dates = $.fn.datepicker.dates = {
 		tr: {
-			days: ["Pazar", "Pazartesi", "Salý", "Çarþamba", "Perþembe", "Cuma", "Cumartesi"],
-			daysShort: ["Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts"],
-			daysMin: ["Pa", "Pt", "Sa", "Ça", "Pe", "Cu", "Ct"],
+			days: ["Pazar", "Pazartesi", "Salý", "Carþamba", "Perþembe", "Cuma", "Cumartesi"],
+			daysShort: ["Paz", "Pts", "Sal", "Car", "Per", "Cum", "Cts"],
+			daysMin: ["Pa", "Pt", "Sa", "Ca", "Pe", "Cu", "Ct"],
 			months: ["Ocak", "Þubat", "Mart", "Nisan", "Mayýs", "Haziran", "Temmuz", "Aðustos", "Eylül", "Ekim", "Kasým", "Aralýk"],
 			monthsShort: ["Oca", "Þub", "Mar", "Nis", "May", "Haz", "Tem", "Aug", "Eyl", "Eki", "Kas", "Ara"],
 			today: "Today",

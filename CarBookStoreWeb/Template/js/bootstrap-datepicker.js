@@ -1396,9 +1396,9 @@
 		daysOfWeekDisabled: [],
 		endDate: Infinity,
 		forceParse: true,
-		format: 'mm/dd/yyyy',
+		format: 'DD-MM-YYYY',
 		keyboardNavigation: true,
-		language: 'en',
+		language: 'tr',
 		minViewMode: 0,
 		multidate: false,
 		multidateSeparator: ',',
@@ -1417,17 +1417,16 @@
 	];
 	$.fn.datepicker.Constructor = Datepicker;
 	var dates = $.fn.datepicker.dates = {
-		en: {
-			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-			daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-			daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
-			months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-			monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		tr: {
+			days: ["Pazar", "Pazartesi", "Salý", "Carþamba", "Perþembe", "Cuma", "Cumartesi"],
+			daysShort: ["Paz", "Pts", "Sal", "Car", "Per", "Cum", "Cts"],
+			daysMin: ["Pa", "Pt", "Sa", "Ca", "Pe", "Cu", "Ct"],
+			months: ["Ocak", "Þubat", "Mart", "Nisan", "Mayýs", "Haziran", "Temmuz", "Aðustos", "Eylül", "Ekim", "Kasým", "Aralýk"],
+			monthsShort: ["Oca", "Þub", "Mar", "Nis", "May", "Haz", "Tem", "Aug", "Eyl", "Eki", "Kas", "Ara"],
 			today: "Today",
 			clear: "Clear"
 		}
 	};
-
 	var DPGlobal = {
 		modes: [
 			{

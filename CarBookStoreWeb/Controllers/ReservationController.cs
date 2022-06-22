@@ -32,6 +32,13 @@ namespace CarBookStoreWeb.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Create(Reservation reservation)
+        {
+           
+            return View();
+        }
+
         private void DropdownFill(int id)
         {
             ViewBag.Reservation = new SelectList(context.Cars.Where(q=>q.Id==id),"Id","CarName");

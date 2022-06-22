@@ -148,23 +148,33 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @*<script src="~/lib/plugins/select2/js/select2.full.min.js"></script>
-
-        <script src="~/lib/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-
-        <script src="~/lib/plugins/moment/moment.min.js"></script>
-        <script src="~/lib/plugins/inputmask/jquery.inputmask.min.js"></script>
-
-        <script src="~/lib/plugins/daterangepicker/daterangepicker.js"></script>
-
-        <script src="~/lib/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-
-        <script src="~/lib/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>*@
-
-  
-
-
+   
     @await RenderSectionAsync("Scripts", required: false)
+<script>
+
+
+          @if (TempData["success"] != null)
+            {
+                <text>
+                Swal.fire(
+                @TempData["success"],
+                'Devam Etmek İçin Butona Tıklayınız!',
+                'success')
+                </text>
+            }
+
+            @if (TempData["error"] != null)
+            {
+                <text>
+                Swal.fire({
+                    icon: 'error',
+                    title: @TempData["error"],
+                    text: 'Devam Etmek İçin Butona Tıklayınız!',
+
+                })
+                </text>
+            }
+</script>
 </body>
 </html>
 

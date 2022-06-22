@@ -79,46 +79,58 @@
         </div>
 
         <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <div class="form-group">
-                    <label asp-for="RentalDate">Kiralama Tarihi</label>
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" asp-for="RentalDate" value="" class="form-control datetimepicker-input" data-target="#reservationdate">
+            @*<div class="col-md-4 mb-3">
+            <div class="form-group">
+                <label asp-for="RentalDate">Kiralama Tarihi</label>
+                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                    <input type="text" asp-for="RentalDate" value="" class="form-control" id="time_pick" data-target="#reservationdate">
 
-                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar" id="rentdate"></i></div>
-                        </div>
+                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar " id="time_pick"></i></div>
                     </div>
                 </div>
-                <span asp-validation-for="RentalDate"></span>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-group">
-                    <label asp-for="PurchaseDate">Alış Tarihi</label>
-                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
-                        <input type="text" asp-for="PurchaseDate" value="" class="form-control datetimepicker-input" data-target="#reservationdate1">
+            <span asp-validation-for="RentalDate"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                <label asp-for="PurchaseDate">Alış Tarihi</label>
+                <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                    <input type="text" asp-for="PurchaseDate" value="" class="form-control add-on input-group-addon btn" id="book_off_date" data-target="#reservationdate1">
 
-                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
+                    <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar" id="book_off_date"></i></div>
                     </div>
                 </div>
-                <span asp-validation-for="PurchaseDate"></span>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="form-group">
-                    <label asp-for="DeliveryDate">Teslim Tarihi</label>
-                    <div class="input-group date" id="reservationdate2" data-target-input="nearest">
-                        <input type="text" asp-for="DeliveryDate" value="" class="form-control datetimepicker-input" data-target="#reservationdate2">
+            <span asp-validation-for="PurchaseDate"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                <label asp-for="DeliveryDate">Teslim Tarihi</label>
+                <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                    <input type="text" asp-for="DeliveryDate" value="" class="form-control add-on input-group-addon btn" data-target="#reservationdate2">
 
-                        <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
+                    <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
                 </div>
-                <span asp-validation-for="DeliveryDate"></span>
             </div>
+            <span asp-validation-for="DeliveryDate"></span>
+        </div>*@
 
+            <div class="col-md-4 mb-3">
+                <label asp-for="RentalDate" class="label">Kiralama Tarihi</label>
+                <input asp-for="RentalDate" type="text" class="form-control" id="book_pick_date">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="PurchaseDate" class="label">Alış Tarihi</label>
+                <input asp-for="PurchaseDate" type="text" class="form-control" id="book_pick_date">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="DeliveryDate" class="label">Teslim Tarihi</label>
+                <input asp-for="DeliveryDate" type="text" class="form-control" id="book_pick_date">
+            </div>
 
         </div>
         <button type="submit" class="btn btn-primary">
@@ -148,17 +160,17 @@
 
     <script>
 
-        $(function () {
-            $("#rentdate").datepicker({
-                monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
-                dayNames: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"],
-                dayNamesMin: ["Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts"],
-                prevText: "Geri",
-                nextText: "İleri",
-                firstDay: 1,
-                dateFormat: "dd.mm.yy"
-            });
-        });
+        //$(function () {
+        //    $("#book_pick_date").datepicker({
+        //        monthNames: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+        //        dayNames: ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"],
+        //        dayNamesMin: ["Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts"],
+        //        prevText: "Geri",
+        //        nextText: "İleri",
+        //        firstDay: 1,
+        //        dateFormat: "dd.mm.yy"
+        //    });
+        //});
 
 
         //$.fn.datepicker.dates['tr'] =
@@ -173,7 +185,7 @@
         //    meridiem: []
         //};
 
-        //$("#rentdate").datepicker(
+        //$("#book_pick_date").datepicker(
         //    {
                
         //        format: "DD-MM-YYYY",
