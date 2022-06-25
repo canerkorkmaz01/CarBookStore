@@ -1,16 +1,18 @@
 ﻿using CarBookData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CarBookStoreWeb.Controllers
 {
     public class ReservationController : Controller
     {
-        private const string EntityName= "";
+        private const string entityName= "";
         private readonly AppDbContext context;
 
         public ReservationController(AppDbContext context)
@@ -33,10 +35,25 @@ namespace CarBookStoreWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Reservation reservation)
+        public async Task <IActionResult> Create(Reservation reservation)
         {
-           
-            return View();
+            reservation.DateCreated = DateTime.Now;
+            reservation.UserId = 0;
+            context.Entry(reservation).State = EntityState.Added;
+
+            try
+            {
+                await context.SaveChangesAsync();
+                TempData["success"] = $"{entityName} Rezervasyon işlemi başarıyla tamamlanmıştır";
+                return RedirectToAction("Index","Home");
+            }
+            catch (DbUpdateException)
+            {
+                TempData["error"] = $"{entityName} Rezervasyon Ekleme işleminde Hata Oluştu";
+                DropdownFill(reservation.CarId);
+                return View(reservation);
+            }
+            
         }
 
         private void DropdownFill(int id)
