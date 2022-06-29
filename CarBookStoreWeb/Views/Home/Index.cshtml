@@ -1,5 +1,6 @@
 ﻿@{ Layout = "~/Views/Shared/_Layout.cshtml";
-                ViewData["Title"] = "Anasayfa"; }
+    ViewData["Title"] = "Anasayfa";
+}
 @model IEnumerable<Car>
 <partial name="NavPartial" />
 <section class="ftco-section ftco-no-pt bg-light">
@@ -71,6 +72,7 @@
                                             <p class="price ml-auto">@carList.Pricings.DailyWages TL <span>/Günlük</span></p>
                                         </div>
                                         <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create" asp-route-id="@carList.Id" class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a> <a href="#" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
+
                                     </div>
                                 </div>
                             </div>
@@ -324,3 +326,27 @@
         </div>
     </div>
 </section>
+
+@*<script>
+    $(document).on("click", ".user-update", function (event) {
+        var row = $(this).closest("tr");
+        var userId = $(row).find(".user-update").attr("data-id");
+        var checkbox = $(row).find(`.user-status-check`);
+        var label = $(row).find(`.user-status-label`);
+
+        $.ajax({
+            type: "GET",
+            url: `./User/Edit/` + userId,
+            success: function (response) {
+                checkbox.prop('checked', response);
+                label.html(response ?
+                    `<span class="badge badge-success">Aktif</span>` :
+                    `<span class="badge badge-danger">Pasif</span>`);
+            },
+            error: function () {
+                alert('hata ');
+                console.log('Failed ');
+            }
+        });
+    });
+</script>*@

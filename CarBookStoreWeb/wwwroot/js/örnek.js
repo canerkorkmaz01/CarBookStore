@@ -149,3 +149,54 @@
         //    $("#reservationdate").datepicker(options);
         //});
 
+ //var data = $("#reservationForm").serialize();
+
+                //$.ajax({
+                //    type: 'POST',
+                //    url: '/Reservation/Create',
+                //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+                //    data: data,
+                //    success: function (result) {
+                //        alert('Successfully received Data ');
+                //        console.log(result);
+                //    },
+                //    error: function () {
+                //        alert('Failed to receive the Data');
+                //        console.log('Failed ');
+                //    }
+                //});
+
+
+
+                //    var reservation = new Object();
+
+                //    reservation.CarId = $("#CarId").val();
+                //    reservation.NameSurname = $("#NameSurname").val();
+                //    reservation.Telephone = $("#Telephone").val();
+                //    reservation.Email = $("#Email").val();
+                //    reservation.RentalDate = $("#RentalDate").val();
+                //    reservation.PurchaseDate = $("#PurchaseDate").val();
+                //    reservation.DeliveryDate = $("#DeliveryDate").val();
+                //    reservation.FuelType = $("#FuelType").val();
+                //    reservation.GearType = $("#GearType").val();
+                //       if (reservation != null) {
+                //            $.ajax({
+                //                type: "POST",
+                //                url: "/Reservation/Create",
+                //                data: JSON.stringify(reservation),
+                //                contentType: "application/json; charset=utf-8",
+                //                dataType: "json",
+                //                success: function () {
+                //                    alert("İşlemde Başarı");
+                //                 },
+                //                 error: function () {
+                //                     alert("işlemde hata");
+                //                 }
+                //            });
+                //       }            
+                //});
+            //$("#btnAdd").click(function () {
+
+            //    var de = $("#NameSurname").val();
+            //    alert(de);
+            //});

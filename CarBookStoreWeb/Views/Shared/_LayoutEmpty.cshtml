@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <title>Araç Kiralama - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Araç Kiralama </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -20,17 +20,12 @@
 
     <link rel="stylesheet" href="~/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="~/css/jquery.timepicker.css">
-
-
-
     <link rel="stylesheet" href="~/css/flaticon.css">
     <link rel="stylesheet" href="~/css/icomoon.css">
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/lib/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="~/lib/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="~/lib/plugins/fontawesome-free/css/all.min.css">
-
-
 </head>
 <body>
 
@@ -130,8 +125,6 @@
 
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/jquery-migrate-3.0.1.min.js"></script>
-    @*<script src="~/js/popper.min.js"></script>*@
-    @*<script src="~/js/bootstrap.min.js"></script>*@
     <script src="~/js/jquery.easing.1.3.js"></script>
     <script src="~/js/jquery.waypoints.min.js"></script>
     <script src="~/js/jquery.stellar.min.js"></script>
@@ -142,39 +135,41 @@
     <script src="~/js/bootstrap-datepicker.js"></script>
     <script src="~/js/jquery.timepicker.min.js"></script>
     <script src="~/js/scrollax.min.js"></script>
-    @*<script src="~/js/google-map.js"></script>*@
     <script src="~/js/main.js"></script>
-
+    <script src="~/lib/plugins/inputmask/jquery.inputmask.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
-<script>
+    <script>
 
 
-          @if (TempData["success"] != null)
+          @if (TempData["Success"] != null)
             {
                 <text>
-                Swal.fire(
-                @TempData["success"],
-                'Devam Etmek İçin Butona Tıklayınız!',
-                'success')
+                swal({
+                  title:  @TempData["Success"],
+                  text: "İşlem Başarılı Oldu Devam Etmek İçin Tamam Butonuna Basınız!",
+                  icon: "success",
+                  button: "Tamam"
+                });
                 </text>
             }
 
-            @if (TempData["error"] != null)
+            @if (TempData["Error"] != null)
             {
                 <text>
-                Swal.fire({
-                    icon: 'error',
-                    title: @TempData["error"],
-                    text: 'Devam Etmek İçin Butona Tıklayınız!',
-
-                })
+                swal({
+                  title:  @TempData["Error"],
+                  text: "İşlem Başarısız Oldu Devam Etmek İçin Tamam Butonuna Basınız!",
+                  icon: "error",
+                  button: "Tamam"
+                });
                 </text>
             }
-</script>
+    </script>
 </body>
 </html>
 

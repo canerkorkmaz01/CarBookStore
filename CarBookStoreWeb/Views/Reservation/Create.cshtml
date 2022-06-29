@@ -1,6 +1,6 @@
-﻿@model Reservation
+﻿
+@model Reservation
 @{
-
     Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
     ViewData["Title"] = "Rezervasyon";
 }
@@ -18,86 +18,85 @@
 </section>
 
 *<div class="mt-2 container">
-    <form method="post" enctype="multipart/form-data">
+     @*<form method="post" >*@
+     @*<form id="reservationForm" novalidate class="needs-validation">*@
 
+         @if (!ViewContext.ModelState.IsValid)
+         {
+             <div class="alert alert-danger">
+                 @Html.ValidationSummary()
+             </div>
+         }
 
-        @if (!ViewContext.ModelState.IsValid)
-        {
-            <div class="alert alert-danger">
-                @Html.ValidationSummary()
-            </div>
-        }
+         <div class="form-row">
+             <div class="col-md-4 mb-3 form-group">
+                 <label asp-for="CarId">Araç Seçiniz</label>
+                 <select asp-for="CarId" class="custom-select" asp-items="@ViewBag.Reservation" selected>
+                 </select>
+                 <span asp-validation-for="CarId"></span>
+             </div>
 
-        <div class="form-row">
-            <div class="col-md-4 mb-3 form-group">
-                <label asp-for="CarId">Araç Seçiniz</label>
-                <select asp-for="CarId" class="custom-select" asp-items="@ViewBag.Reservation" selected>
-                </select>
-                <span asp-validation-for="CarId"></span>
-            </div>
+             <div class="col-md-4 mb-3 form-group">
+                 <label asp-for="GearType">Vites Türü</label>
+                 <select class="custom-select" asp-for="GearType" asp-items="@ViewBag.GearType">
+                 </select>
+                 <span asp-validation-for="GearType"></span>
+             </div>
+             <div class="col-md-4 mb-3 form-group">
+                 <label asp-for="FuelType">Yakıt Türü</label>
+                 <select class="custom-select" asp-for="FuelType" asp-items="@ViewBag.FuelType">
+                 </select>
+                 <span asp-validation-for="FuelType"></span>
+             </div>
 
-            <div class="col-md-4 mb-3">
-                <label asp-for="NameSurname">Adınız Soyadınız</label>
-                <input type="text" class="form-control" asp-for="NameSurname" placeholder="Adınız Soyadınızı Giriniz">
-                <span asp-validation-for="NameSurname"></span>
-            </div>
+             <div class="col-md-4 mb-3">
+                 <label asp-for="NameSurname">Adınız Soyadınız</label>
+                 <input type="text" class="form-control" asp-for="NameSurname" placeholder="Adınız Soyadınızı Giriniz">
+                 <span asp-validation-for="NameSurname"></span>
+             </div>
+             <div class="col-md-4 mb-3">
+                 <div class="form-group">
+                     <label asp-for="Telephone">Telefon</label>
+                     <div class="input-group">
+                         <div class="input-group-prepend">
+                         </div>
+                         <input type="text" asp-for="Telephone" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask placeholder="Telefon Numarası Giriniz">
+                     </div>
+                     <span asp-validation-for="Telephone"> </span>
+                 </div>
+             </div>
 
+             <div class="col-md-4 mb-3">
+                 <label asp-for="Email" class="form-label">Email Adresi</label>
+                 <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Lütfen Email Adresi Giriniz">
+                 <span asp-validation-for="Email"></span>
+             </div>
+         </div>
+         <div class="form-row">
+             <div class="col-md-4 mb-3">
+                 <label asp-for="RentalDate" class="label">Kiralama Tarihi</label>
+                 <input asp-for="RentalDate" type="text" value="" class="form-control datetime-picker-restraint" id="book_pick_date1">
+                 <span asp-validation-for="RentalDate"></span>
+             </div>
 
-            <div class="col-md-4 mb-3">
-                <div class="form-group">
-                    <label asp-for="Telephone">Telefon</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                        </div>
-                        <input type="text" asp-for="Telephone" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask>
-                        <span asp-validation-for="Telephone"> </span>
-                    </div>
-                </div>
-            </div>
+             <div class="col-md-4 mb-3">
+                 <label asp-for="PurchaseDate" class="label">Alış Tarihi</label>
+                 <input asp-for="PurchaseDate" type="text" value="" class="form-control datetime-picker-restraint" id="book_pick_date2">
+                 <span asp-validation-for="PurchaseDate"></span>
+             </div>
 
-            <div class="col-md-4 mb-3">
-                <label asp-for="Email" class="form-label">Email Adresi</label>
-                <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Lütfen Email Adresi Giriniz">
-                <span asp-validation-for="Email"></span>
-            </div>
+             <div class="col-md-4 mb-3">
+                 <label asp-for="DeliveryDate" class="label">Teslim Tarihi</label>
+                 <input asp-for="DeliveryDate" type="text" value="" class="form-control datetime-picker-restraint" id="book_pick_date3">
+                 <span asp-validation-for="DeliveryDate"></span>
+             </div>
 
-            <div class="col-md-4 mb-3 form-group">
-                <label asp-for="GearType">Vites Türü</label>
-                <select class="custom-select" asp-for="GearType" asp-items="@Html.GetEnumSelectList<GearType>()">
-                    <option value="" selected disabled>Vites Seçiniz...</option>
-                </select>
-                <span asp-validation-for="GearType"></span>
-            </div>
-            <div class="col-md-4 mb-3 form-group">
-                <label asp-for="FuelType">Yakıt Türü</label>
-                <select class="custom-select" asp-for="FuelType" asp-items="@Html.GetEnumSelectList<FuelType>()">
-                    <option value="" selected disabled>Yakıt Tipi Seçiniz...</option>
-                </select>
-                <span></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <label asp-for="RentalDate" class="label">Kiralama Tarihi</label>
-                <input asp-for="RentalDate" type="text" class="form-control datetime-picker-restraint" id="book_pick_date1">
-            </div>
-            <div class="col-md-4 mb-3">
-                <label asp-for="PurchaseDate" class="label">Alış Tarihi</label>
-                <input asp-for="PurchaseDate" type="text" class="form-control datetime-picker-restraint" id="book_pick_date2">
-            </div>
-            <div class="col-md-4 mb-3">
-                <label asp-for="DeliveryDate" class="label">Teslim Tarihi</label>
-                <input asp-for="DeliveryDate" type="text" class="form-control datetime-picker-restraint" id="book_pick_date3">
-            </div>
-
-        </div>
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-save"></i> Rezervasyon Yap
-        </button>
-        <a class="btn btn-link" asp-controller="Home" asp-action="Index">İptal</a>
-    </form>
+         </div>
+         <button type="submit" class="btn btn-primary" id="btnAdd">
+             <i class="fa fa-save"></i> Rezervasyon Yap
+         </button>
+         <a class="btn btn-link" asp-controller="Home" asp-action="Index">İptal</a>
+         @*</form>*@
 </div>
 
 <section class="ftco-section bg-light mt-3">
@@ -119,19 +118,103 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
+        $(document).ready(function () {
+            $(":input").inputmask();
+            /*
+            or    Inputmask().mask(document.querySelectorAll("input"));*/
+
+            $("#btnAdd").click(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Reservation/Create",
+                    data: {
+                        "CarId": $("#CarId").val(), "NameSurname": $("#NameSurname").val(), "Telephone": $("#Telephone").val(), "Email": $("#Email").val(),
+                        "RentalDate": $("#book_pick_date1").val(),"PurchaseDate": $("#book_pick_date2").val()
+                        ,"DeliveryDate": $("#book_pick_date3").val(), "FuelType": $("#FuelType").val(), "GearType": $("#GearType").val()
+                    },
+ /*                   dataType: "json",*/
+                    success: function (response) {
+                        alert(response);
+                    },
+                    
+                    error: function (response) {
+                        /*  alert(response.responseText);*/
+                        alert("Başarısız");
+                    }
+                });
+        
+            });
+
+
+
+
+            //var data = $("#reservationForm").serialize();
+
+                //$.ajax({
+                //    type: 'POST',
+                //    url: '/Reservation/Create',
+                //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+                //    data: data,
+                //    success: function (result) {
+                //        alert('Successfully received Data ');
+                //        console.log(result);
+                //    },
+                //    error: function () {
+                //        alert('Failed to receive the Data');
+                //        console.log('Failed ');
+                //    }
+                //});
+
+
+
+                //    var reservation = new Object();
+
+                //    reservation.CarId = $("#CarId").val();
+                //    reservation.NameSurname = $("#NameSurname").val();
+                //    reservation.Telephone = $("#Telephone").val();
+                //    reservation.Email = $("#Email").val();
+                //    reservation.RentalDate = $("#RentalDate").val();
+                //    reservation.PurchaseDate = $("#PurchaseDate").val();
+                //    reservation.DeliveryDate = $("#DeliveryDate").val();
+                //    reservation.FuelType = $("#FuelType").val();
+                //    reservation.GearType = $("#GearType").val();
+                //       if (reservation != null) {
+                //            $.ajax({
+                //                type: "POST",
+                //                url: "/Reservation/Create",
+                //                data: JSON.stringify(reservation),
+                //                contentType: "application/json; charset=utf-8",
+                //                dataType: "json",
+                //                success: function () {
+                //                    alert("İşlemde Başarı");
+                //                 },
+                //                 error: function () {
+                //                     alert("işlemde hata");
+                //                 }
+                //            });
+                //       }            
+                //});
+            //$("#btnAdd").click(function () {
+
+            //    var de = $("#NameSurname").val();
+            //    alert(de);
+            //});
+
+           
+            });
+
+
         $(".datetime-picker-restraint").datepicker(
             {
-                format: 'mm/dd/yyyy',
+                format: "dd/mm/yyyy",
                 icons: {
                     time: 'far fa-clock'
                 },
                 startDate: new Date()
             }).on('change', function () {
                 $('.datepicker').hide();
-                
             });
-
-       
     </script>
 }
 

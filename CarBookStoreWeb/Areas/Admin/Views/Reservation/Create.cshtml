@@ -146,6 +146,18 @@
     <script src="~/js/Projects.js"></script>
 
     <script>
+
+        $(".datetimepicker-input").datepicker(
+            {
+                format: "dd/MM/yyyy",
+                icons: {
+                    time: 'far fa-clock'
+                },
+                startDate: new Date()
+            }).on('change', function () {
+                $('.datepicker').hide();
+            });
+
         $(function ($) {
             $.fn.datepicker.dates['tr'] =
             {

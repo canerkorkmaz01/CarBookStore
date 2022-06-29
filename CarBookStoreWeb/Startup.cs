@@ -32,6 +32,7 @@ namespace CarBookStoreWeb
             //CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             //CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
+
             services.AddControllersWithViews()
 
             .AddNewtonsoftJson(options =>
