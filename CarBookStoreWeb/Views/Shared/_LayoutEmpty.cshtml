@@ -143,33 +143,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-    <script>
-
-
-          @if (TempData["Success"] != null)
-            {
-                <text>
-                swal({
-                  title:  @TempData["Success"],
-                  text: "İşlem Başarılı Oldu Devam Etmek İçin Tamam Butonuna Basınız!",
-                  icon: "success",
-                  button: "Tamam"
-                });
-                </text>
-            }
-
-            @if (TempData["Error"] != null)
-            {
-                <text>
-                swal({
-                  title:  @TempData["Error"],
-                  text: "İşlem Başarısız Oldu Devam Etmek İçin Tamam Butonuna Basınız!",
-                  icon: "error",
-                  button: "Tamam"
-                });
-                </text>
-            }
-    </script>
+   
 </body>
 </html>
 

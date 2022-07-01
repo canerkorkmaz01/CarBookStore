@@ -11,9 +11,10 @@ using System.Threading.Tasks;
 
 namespace CarBookStoreWeb.Controllers
 {
+   
     public class ReservationController : Controller
     {
-        private const string entityName= "";
+        private const string entityName= "Rezervasyon";
         private readonly AppDbContext context;
    
         public ReservationController(AppDbContext context)
@@ -31,10 +32,10 @@ namespace CarBookStoreWeb.Controllers
         }
 
         
-        public IActionResult Create(int? id)
+        public IActionResult Create(int? reservationid)
         {
 
-            DropdownFill(id);
+            DropdownFill(reservationid);
 
             return View();
             
@@ -48,23 +49,23 @@ namespace CarBookStoreWeb.Controllers
             reservation.UserId = 1;
             context.Entry(reservation).State = EntityState.Added;
 
+            //await context.SaveChangesAsync();
+            //return RedirectToAction("Index", "Home");
+            try
+            {
+                await context.SaveChangesAsync();
+                TempData["Success"] = $"{entityName} Rezervasyon işlemi başarıyla tamamlanmıştır";
+                //return RedirectToAction("Index","Home");
+                //return Redirect("Home/Index");
 
-            await context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
-            //try
-            //{
-            //    //await context.SaveChangesAsync();
-            //    TempData["Success"] = $"{entityName} Rezervasyon işlemi başarıyla tamamlanmıştır";
-            //    return RedirectToAction("Index", "Home");
-            //    //return Json(reservation);
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    TempData["Error"] = $"{entityName} Rezervasyon Ekleme işleminde Hata Oluştu";
-            //    //DropdownFill(reservation.Id);
-            //    return View(reservation);
-            //}
-            
+                return View();
+            }
+            catch (DbUpdateException)
+            {
+                TempData["Error"] = $"{entityName} Rezervasyon Ekleme işleminde Hata Oluştu";
+                //DropdownFill(reservation.Id);
+                return View(reservation);
+            }
         }
 
         private void DropdownFill(int? id)
