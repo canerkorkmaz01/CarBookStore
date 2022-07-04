@@ -26,19 +26,14 @@ namespace CarBookStoreWeb.Controllers
 
         public IActionResult Index()
         {
-            //ID = Reservationid;
-            //return RedirectToAction("Create");
             return View();
         }
 
         
         public IActionResult Create(int? reservationid)
         {
-
             DropdownFill(reservationid);
-
             return View();
-            
         }
 
         [HttpPost]
@@ -49,20 +44,13 @@ namespace CarBookStoreWeb.Controllers
             reservation.UserId = 1;
             context.Entry(reservation).State = EntityState.Added;
 
-            //await context.SaveChangesAsync();
-            //return RedirectToAction("Index", "Home");
             try
             {
                 await context.SaveChangesAsync();
-                TempData["Success"] = $"{entityName} Rezervasyon işlemi başarıyla tamamlanmıştır";
-                //return RedirectToAction("Index","Home");
-                //return Redirect("Home/Index");
-
                 return View();
             }
             catch (DbUpdateException)
             {
-                TempData["Error"] = $"{entityName} Rezervasyon Ekleme işleminde Hata Oluştu";
                 //DropdownFill(reservation.Id);
                 return View(reservation);
             }

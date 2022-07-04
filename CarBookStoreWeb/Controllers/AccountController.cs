@@ -140,17 +140,6 @@ namespace CarBookStoreWeb.Controllers
                 }
                 
             }
-           
-
-           
-          
-
-
-
-
-
-
-
 
             //var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
             //if (result.Succeeded )
