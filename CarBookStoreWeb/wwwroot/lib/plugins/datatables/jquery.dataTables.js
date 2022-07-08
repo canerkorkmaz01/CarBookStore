@@ -11807,7 +11807,7 @@
 			 *    $(document).ready( function() {
 			 *      $('#example').dataTable( {
 			 *        "language": {
-			 *          "lengthMenu": 'Display <select>'+
+			 *          "lengthMenu": 'Display <select id="pageOption">'+
 			 *            '<option value="10">10</option>'+
 			 *            '<option value="20">20</option>'+
 			 *            '<option value="30">30</option>'+
@@ -14591,7 +14591,7 @@
 		"sFilter": "dataTables_filter",
 		"sInfo": "dataTables_info",
 		"sPaging": "dataTables_paginate paging_", /* Note that the type is postfixed */
-		"sLength": "dataTables_length",
+		"sLength": "dataTables_length float-right",
 		"sProcessing": "dataTables_processing",
 	
 		/* Sorting */

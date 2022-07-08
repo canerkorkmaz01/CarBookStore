@@ -1376,7 +1376,7 @@ var DateTimePicker = function ($, moment) {
         throw new TypeError("maxDate() date parameter is before this.options.minDate: " + parsedDate.format(this.actualFormat));
       }
 
-      this._options.maxDate = parsedDate;
+        this._options.maxDate = parsedDate;
 
       for (var i = 0; i < this._dates.length; i++) {
         if (this._options.useCurrent && !this._options.keepInvalid && this._dates[i].isAfter(_maxDate)) {

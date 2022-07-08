@@ -5078,7 +5078,7 @@ S2.define('select2/defaults',[
       debug: false,
       dropdownAutoWidth: false,
       escapeMarkup: Utils.escapeMarkup,
-      language: {},
+      language: tr,
       matcher: matcher,
       minimumInputLength: 0,
       maximumInputLength: 0,

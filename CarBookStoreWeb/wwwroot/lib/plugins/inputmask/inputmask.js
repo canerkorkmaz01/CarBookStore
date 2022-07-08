@@ -928,8 +928,8 @@
                         max: null,
                         skipOptionalPartCharacter: "",
                         i18n: {
-                            dayNames: [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ],
-                            monthNames: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
+                            dayNames: [ "Pts", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz", "Pazartesi", "Salý", "Çarþamba", "Perþembe", "Cuma", "Cumartesi", "Pazar" ],
+                            monthNames: [ "Oca", "Þub", "Mar", "Nis", "May", "Haz", "Tem", "Agu", "Eyl", "Ekm", "Kas", "Ara", "Ocak", "Þubat", "Mart", "Nisan", "Mayýs", "Haziran", "Temmuz", "Agustos", "Eylül", "Ekim", "Kasým", "Aralýk" ],
                             ordinalSuffix: [ "st", "nd", "rd", "th" ]
                         },
                         preValidation: function(e, t, i, a, n, r, o, l) {

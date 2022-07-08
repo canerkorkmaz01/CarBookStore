@@ -19,9 +19,12 @@
             </div>
         </div>
         <div class="table-responsive" style="width:100%">
-            <a asp-controller="Reservation" asp-action="Create" class="btn btn-info  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Rezervasyon Ekle</a>
-            <label>Search:<input type="search" class="" placeholder="" aria-controls="example"></label>
-            <table class="table">
+            <div id="btn-reservation">
+                <a asp-controller="Reservation" asp-action="Create" class="btn btn-info  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Rezervasyon Ekle</a><br />
+            </div>
+            @*<span class="float-right"><input type="search" class="form-control float-right " placeholder="Arama" aria-controls="example"></span>*@
+
+            <table id="myTable" class="table">
                 <thead>
                     <tr>
                         <th class="text-nowrap">
@@ -128,3 +131,48 @@
     </div>
     <!-- /.card -->
 </section>
+
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                language: {
+                    info: "_TOTAL_ kayıttan _START_ - _END_  Kayıt gösteriliyor.",
+                    infoEmpty: "Gösterilecek hiç kayıt yok.",
+                    loadingRecords: "Kayıtlar yükleniyor.",
+                    lengthMenu: "Sayfada _MENU_  Kayıt Göster",
+                    zeroRecords: "Tablo boş",
+                    search: "Arama:",
+                    infoFiltered: "(toplam _MAX_ kayıttan filtrelenenler)",
+                    buttons: {
+                        copyTitle: "Panoya kopyalandı.",
+                        copySuccess: "Panoya %d satır kopyalandı",
+                        copy: "Kopyala",
+                        print: "Yazdır",
+                    },
+                    paginate: {
+                        first: "İlk",
+                        previous: "Önceki",
+                        next: "Sonraki",
+                        last: "Son"
+                    },
+                }
+            });
+            var colorText = "#ffffff";
+            var backColor = "#343841";
+            $("input[type='search']").on('click',function () {
+                $("input[type='search']").css({ "color": colorText});
+            });
+            $("label").css("color", colorText);
+            $("select option").css("background-color", backColor);
+            //$("select").change(function () {
+              
+            //});
+           
+        });
+       
+    </script>
+
+}

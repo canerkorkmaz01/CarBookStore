@@ -152,7 +152,20 @@
 
                     error: function (response) {
                         /*  alert(response.responseText);*/
-                        alert("Başarısız");
+                        Swal.fire({
+                            title: 'Rezervasyon',
+                            text: "İşlem Başarısız Oldu Devam Etmek İçin Tamam Butonuna Basınız!",
+                            icon: 'error',
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Tamam'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire(
+                                    window.history.back()
+                                )
+                            }
+                        })
                     }
                 });
 
