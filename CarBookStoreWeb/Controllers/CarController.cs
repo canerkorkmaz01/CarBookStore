@@ -28,9 +28,10 @@ namespace CarBookStoreWeb.Controllers
         }
 
        
-        public IActionResult Cars()
+        public IActionResult Car()
         {
-            return View();
+            var cars = context.Cars.OrderBy(q => q.CarName).ToList();
+            return View(cars);
         }
     }
 }
