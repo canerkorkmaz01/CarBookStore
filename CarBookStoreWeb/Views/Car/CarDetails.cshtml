@@ -126,29 +126,27 @@
 
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
-                            <div class="row">
-                                <div class="col-md-4 "  >
-                                    @foreach (var feature in ViewBag.CarFeatures as IEnumerable<SelectListItem>)
-                                    {
-                                    <ul class="features">
+                            <div class="row ">
+                                @foreach (var feature in ViewBag.CarFeatures as IEnumerable<SelectListItem>)
+                                {
+                                    <div class="col-md-4 ">
+                                        <ul class="features">
+                                            @if (feature.Selected)
+                                            {
 
-                                        @if (feature.Selected)
-                                        {
-                                        <li class="check" id="feature_@feature.Value" name="SelectedFeatures" value="@feature.Value">
-                                            <span class="ion-ios-checkmark" for="feature_@feature.Value"></span> @feature.Text
-                                        </li>
-                                            
-                                        }
-                                        else
-                                        {
-                                         <li class="remove" id="feature_@feature.Value" name="SelectedFeatures" value="@feature.Value">
-                                            <span class="ion-ios-close" for="feature_@feature.Value"></span>@feature.Text
-                                         </li>
-                                           
-                                        }
-                                    </ul>
-                                    }
+                                                <li class="check text-nowrap" id="feature_@feature.Value" name="SelectedFeatures" value="@feature.Value">
+                                                    <span class="ion-ios-checkmark" for="feature_@feature.Value"></span> @feature.Text
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="remove text-nowrap" id="feature_@feature.Value" name="SelectedFeatures" value="@feature.Value">
+                                                    <span class="ion-ios-close" for="feature_@feature.Value"></span>@feature.Text
+                                                </li>
+                                            }
+                                        </ul>
                                     </div>
+                                }
                                 </div>
                             </div>
                         </div>
