@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-center"><a href="#" class="btn btn-primary py-3 px-4">Rezervasyon Yapmak İçin Tıklayın </a></p>
+                            <p class="text-center"><a asp-controller="Car" asp-action="Car" class="btn btn-primary py-3 px-4">Rezervasyon Yapmak İçin Tıklayın </a></p>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                             @*<span class="cat">Cheverolet</span>*@
                                             <p class="price ml-auto">@carList.Pricings.DailyWages TL <span>/Günlük</span></p>
                                         </div>
-                                        <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create" asp-route-reservationid="@carList.Id" class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a> <a href="#" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
+                                        <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create" asp-route-reservationid="@carList.Id" class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a> <a asp-controller="Car" asp-action="CarDetails" asp-route-id="@carList.Id" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
 
                                     </div>
                                 </div>
