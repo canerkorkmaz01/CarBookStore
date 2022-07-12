@@ -327,26 +327,13 @@
     </div>
 </section>
 
-@*<script>
-    $(document).on("click", ".user-update", function (event) {
-        var row = $(this).closest("tr");
-        var userId = $(row).find(".user-update").attr("data-id");
-        var checkbox = $(row).find(`.user-status-check`);
-        var label = $(row).find(`.user-status-label`);
+@section Scripts{ 
 
-        $.ajax({
-            type: "GET",
-            url: `./User/Edit/` + userId,
-            success: function (response) {
-                checkbox.prop('checked', response);
-                label.html(response ?
-                    `<span class="badge badge-success">Aktif</span>` :
-                    `<span class="badge badge-danger">Pasif</span>`);
-            },
-            error: function () {
-                alert('hata ');
-                console.log('Failed ');
-            }
+    <script>
+        $(document).ready(function () {
+           
+
         });
-    });
-</script>*@
+    </script>
+
+}

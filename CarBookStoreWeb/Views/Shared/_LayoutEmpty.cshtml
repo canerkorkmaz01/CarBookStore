@@ -61,17 +61,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-<script>
+
    
-        $(document).ready(function () {
-            $('ul.art-vmenu li').live("click", function () {
-                alert($(this).text());
-            });
-
-        });
-</script>
-
-
 </body>
 </html>
 

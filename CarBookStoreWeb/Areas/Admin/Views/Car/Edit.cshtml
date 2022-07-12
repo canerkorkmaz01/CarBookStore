@@ -166,28 +166,6 @@
     <script>
         $(() => {
 
-            @*var den = @Model.Photo;
-            //var image = $('#hiden').attr('src');
-            //$("#PhotoPreview").attr('src', image);
-
-
-            alert(den);
-
-            $("#btn-save-image").click(function () {
-                //alert(image);
-                //$('#photoOne').append('<div id="hover-select" class="p-2 border mr-2"><img src="' + image + '" height="200" /></div>')
-
-                var reader = new FileReader();
-
-                reader= function (event) {
-                    $('#photoOne').append('<div id="hover-select" class="p-2 border mr-2"><img src="' + image + '" height="200" /></div>')
-                }
-                
-                reader.readAsDataURL(document.getElementById("PhotoFile").files[0]);
-               
-            });*@
-
-
             $('#PhotoFile').on('change',function () {
                 var reader = new FileReader();
                 reader.onloadend = function (event) {
