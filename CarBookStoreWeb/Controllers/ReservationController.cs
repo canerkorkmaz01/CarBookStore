@@ -22,8 +22,6 @@ namespace CarBookStoreWeb.Controllers
             this.context = context;
         }
 
-
-
         public IActionResult Index()
         {
             return View();
@@ -41,7 +39,7 @@ namespace CarBookStoreWeb.Controllers
         {
             reservation.DateCreated = DateTime.Now;
             reservation.Enabled = true;
-            reservation.UserId = 1;
+            reservation.UserId = 3;
             context.Entry(reservation).State = EntityState.Added;
 
             try
@@ -62,6 +60,7 @@ namespace CarBookStoreWeb.Controllers
             ViewBag.Reservation = new SelectList(context.Cars.Where(q => q.Id == id), "Id", "CarName");
             ViewBag.GearType = new SelectList(context.Cars.Where(q => q.Id == id), "Id", "GearType");
             ViewBag.FuelType = new SelectList(context.Cars.Where(q => q.Id == id), "Id", "FuelType");
+            ViewBag.Photo = context.Cars.Find(id).Photo;
             
         }
     }

@@ -127,7 +127,8 @@ namespace CarBookStoreWeb
             new[]
             {
                 new Role { Name = "Administrators", DisplayName = "Yöneticiler" },
-                new Role { Name = "Staff", DisplayName = "Personeller" }
+                new Role { Name = "Staff", DisplayName = "Personeller" },
+                 new Role { Name = "Customers", DisplayName = "Müsteriler" }
             }
            .ToList()
            .ForEach(p =>

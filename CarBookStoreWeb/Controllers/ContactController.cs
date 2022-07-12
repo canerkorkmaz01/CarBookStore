@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace CarBookStoreWeb.Controllers
 {
-    public class PricingController : Controller
+    public class ContactController : Controller
     {
         private readonly AppDbContext context;
 
-        public PricingController(AppDbContext context)
+        public ContactController(AppDbContext context)
         {
             this.context = context;
         }
+
         public IActionResult Index()
         {
-            var model = context.Cars.OrderBy(q=>q.CarName).ToList();
+            var model = context.Contacts.SingleOrDefault(q => q.Enabled);
             return View(model);
         }
-       
     }
 }
