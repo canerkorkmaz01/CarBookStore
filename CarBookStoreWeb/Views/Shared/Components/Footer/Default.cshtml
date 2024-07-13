@@ -43,9 +43,9 @@
                     <h2 class="ftco-heading-2">Sorunuz mu Var?</h2>
                     <div class="block-23 mb-3">
                         <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">@Model.Address</span></li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">@Model.Telephone</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">@Model.Email</span></a></li>
+                            @* <li><span class="icon icon-map-marker"></span> <span class="text">@(Model.Address ?? string.Empty)</span></li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">@(Model.Telephone ?? string.Empty)</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">@(Model.Email ?? string.Empty)</span></a></li> *@
                         </ul>
                     </div>
                 </div>

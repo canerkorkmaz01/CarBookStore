@@ -26,7 +26,7 @@
                             <div class="icon mr-3">
                                 <span class="icon-map-o"></span>
                             </div>
-                            <p><span>Adres:</span> @Model.Address</p>
+                            <p><span>Adres:</span> @(Model?.Address ?? string.Empty)</p>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -34,7 +34,7 @@
                             <div class="icon mr-3">
                                 <span class="icon-mobile-phone"></span>
                             </div>
-                            <p><span>Telefon:</span> <a href="@Model.Telephone">@Model.Telephone</a></p>
+                            <p><span>Telefon:</span> <a href="@(Model?.Telephone?? string.Empty)">@(Model?.Telephone ?? string.Empty)</a></p>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -42,7 +42,7 @@
                             <div class="icon mr-3">
                                 <span class="icon-envelope-o"></span>
                             </div>
-                            <p><span>Email:</span> <a href="@Model.Email">@Model.Email</a></p>
+                            <p><span>Email:</span> <a href="@(Model?.Email ?? string.Empty)">@(Model?.Email ?? string.Empty)</a></p>
                         </div>
                     </div>
                 </div>
